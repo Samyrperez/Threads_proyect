@@ -1,33 +1,75 @@
+import { useState } from "react";
+import { Footer } from "../components/Footer";
+import "../css/styles.css"; // Importa el archivo CSS
 
+const Login = () => {
+    const [input, setInput] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-"react-router-dom";
+    async function handleLogin(e) {
+        e.preventDefault();
+        setError("");
 
-function Login() {
+        console.log("Intentando iniciar sesión con:", input, password);
+
+        // Aquí puedes manejar la autenticación cuando integres el backend
+    } 
 
     return (
-        <>
+        <div className="page-container">
             <div className="login-container">
-                <h2>Iniciar Sesión</h2>
-                <input 
-                    type="text"
-                    name="usuario"
-                    placeholder="Nombre de usuario, teléfono o correo electronico"
-                    required
-                />
-                <input 
-                    type="password"
-                    name="password"
-                    placeholder="constraseña"
-                    required
-                />
-                <button type="submit">Iniciar Sesión</button>
+                <div className="login-box">
+                    <img
+                        src="https://images.seeklogo.com/logo-png/48/2/threads-logo-png_seeklogo-489791.png"
+                        alt="Logo Threads"
+                        className="logo-threads"
+                    />
+                    <h2>Inicia sesión</h2>
+                    {error && <p className="error-text">{error}</p>}
+                    <form onSubmit={handleLogin}>
+                        <input
+                            type="text"
+                            placeholder="Nombre de usuario, teléfono o correo electronico"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            className="input-field"
+                            required
+                        />
+                        <input
+                            type="password"
+                            placeholder="Contraseña"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="input-field"
+                            required
+                        />
+                        <button type="submit" className="login-button">
+                            Iniciar sesión
+                        </button>
+                    </form>
+                    <p className="register-text">
+                        ¿No tienes cuenta? <a href="/register" className="register-link">Regístrate</a>
+                    </p>
+                </div>
+                <div className="goToInstagram">
+                    <button className="button-instagram">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                            alt="Logo Instagram"
+                            className="logo-instagram"
+                        />
+                        <p>Ir a Instagram  </p>
+                    </button>
+                </div>
+                <div className="footer">
+                    <Footer />
+                </div>
+                
             </div>
-            <div className="rememberPassword-container">
-                <h2>¿Has olvidado la contraseña?</h2>
-            </div>
-            <div className="goInstagram"><img src="" alt="" /> <h2>Ir a instagram</h2></div>
-        </>
-    )
-}
+        </div>
+        
+    );
+};
 
-export default Login
+export default Login;

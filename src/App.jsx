@@ -1,28 +1,14 @@
+
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Home from "./pages/Home";
-// import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-// import Register from "./pages/Register";
+import Login from "./pages/Login"; // Asegúrate de que la ruta sea correcta
+// import "./css/styles.css"; // Importa los estilos globales
 
-import './App.css'
-
-
-function App(){
+function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          {/* Route recibe dos atributos: path(Con que dirección accede a ese elemento) */}
-          {/* <Route path='/' element= {<Home/>} /> */}
-          <Route path='/login' element= {<Login/>} />
-          {/* <Route path='/register' element= {<Register/>} />
-          <Route path='/dasboard' element= {<Dasboard/>} />  */}
-        </Routes>
-      </Router>
-    </>
-  )
+    <div>
+      <Login />
+    </div>
+  );
 }
 
-
-export default App
+export default App;
