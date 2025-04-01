@@ -11,10 +11,11 @@ const Register = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-          setShowLogo(false); // Oculta el logo después de 3 segundos
+          setShowLogo(false); // Oculta el logo después de 2 segundos
         }, 2000);
         return () => clearTimeout(timer);
     }, []);
+
     const handleRegister = async (e) => {
         e.preventDefault();
         setError("");
