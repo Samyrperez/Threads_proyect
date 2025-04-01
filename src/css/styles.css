@@ -4,6 +4,9 @@ body {
     background: url("https://static.cdninstagram.com/rsrc.php/y1/r/5RtYIp7XME3.avif") no-repeat top center;
     background-size: cover;
     background-attachment: fixed;
+    background-position: center -200px;
+    /* Mueve la imagen 50px hacia arriba */
+    background-repeat: no-repeat;
     background-color: #ffffff;
     font-family: Arial, sans-serif;
     color: #fff;
@@ -27,7 +30,8 @@ body {
 
 /* Contenedor principal */
 .login-container {
-    flex: 1; /* Empuja el footer hacia abajo */
+    flex: 1;
+    /* Empuja el footer hacia abajo */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,13 +111,13 @@ body {
 /* Texto de registro */
 .register-text {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: #000000;
+    color: #535151;
     margin-top: 15px;
     font-size: 14px;
 }
 
 .register-link {
-    color: #000000;
+    color: #535151;
     text-decoration: none;
     font-weight: bold;
 }
@@ -123,11 +127,18 @@ body {
 }
 
 .goToInstagram {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+}
 
+.goToInstagram a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    width: 90%;
 }
 
 .button-instagram {
@@ -143,8 +154,6 @@ body {
     color: #000000;
     border: solid 1px #888;
     border-radius: 10px;
-
-
 }
 
 .logo-instagram {
@@ -152,22 +161,25 @@ body {
 }
 
 /* Footer siempre abajo */
-.footer {
+#footer {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     text-align: center;
     padding: 15px;
     background: #fff;
-    color: #000;
+    color: #535151;
     font-size: 14px;
     width: 100%;
-    
+    margin-top: auto;
+
 }
+
 .footer nav {
     margin-top: 10px;
 }
 
 .footer a {
     margin: 0 10px;
-    color: #000;
+    color: #535151;
     text-decoration: none;
     position: relative;
 }
@@ -195,4 +207,104 @@ body {
         display: none;
         /* Se oculta en pantallas grandes */
     }
+}
+
+/* Register */
+
+.register-container {
+    flex: 1;
+    /* Empuja el footer hacia abajo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+}
+
+.register-box {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.register-box h2 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: bold;
+    /* Ajusta el grosor */
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.register-button {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    width: 100%;
+    padding: 16px 12px;
+    background-color: #000000;
+    color: #4f4f4f;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #535151;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link {
+    color: #535151;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Logo de entrada */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.center-logo {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-threads {
+    animation: fadeIn 1.5s ease-out;
 }

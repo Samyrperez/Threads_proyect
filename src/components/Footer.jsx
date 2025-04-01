@@ -1,6 +1,6 @@
 import "../css/styles.css";
 
-export function Footer() {
+export default function Footer() {
     return (
         <footer className="footer">
             <p>&copy; {new Date().getFullYear()} Condiciones de Threads. Todos los derechos reservados.</p>
