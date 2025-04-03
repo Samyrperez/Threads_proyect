@@ -1,15 +1,7 @@
 /* Estilos generales */
 /* Fondo superior con la imagen */
 body {
-    background: url("https://static.cdninstagram.com/rsrc.php/y1/r/5RtYIp7XME3.avif") no-repeat top center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center -200px;
-    /* Mueve la imagen 50px hacia arriba */
-    background-repeat: no-repeat;
-    background-color: #ffffff;
     font-family: Arial, sans-serif;
-    color: #fff;
     margin: 0;
     height: 100vh;
     display: flex;
@@ -24,7 +16,15 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    background: url("https://static.cdninstagram.com/rsrc.php/y1/r/5RtYIp7XME3.avif") no-repeat top center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center -200px;
+    /* Mueve la imagen 50px hacia arriba */
+    background-repeat: no-repeat;
+    background-color: #ffffff;
 }
 
 
@@ -127,7 +127,7 @@ body {
 }
 
 .goToInstagram {
-    width: 100%;
+    width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,13 +138,13 @@ body {
     display: flex;
     justify-content: center;
     text-decoration: none;
-    width: 90%;
+    width: 100%;
 }
 
 .button-instagram {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: #ffffff;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -196,7 +196,7 @@ body {
         /* Se muestra en móviles */
     }
 
-    body {
+    .page-container {
         background: none;
         background-color: #fff;
     }
@@ -308,3 +308,4 @@ body {
 .logo-threads {
     animation: fadeIn 1.5s ease-out;
 }
+

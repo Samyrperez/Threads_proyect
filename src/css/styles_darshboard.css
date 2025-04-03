@@ -1,0 +1,134 @@
+.dashboard-container {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #0e0d0d;
+    display: flex;
+    justify-content: space-between;
+}
+.avatar {
+    width: 100px;
+}
+.dashboard-container h2, p {
+    color: #000;
+}
+.contaner-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 5%; /* Mantiene la barra lateral fija sin mover otros elementos */
+    background-color: #0e0d0d;
+}
+.nav-dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.nav-dashboard a:hover {
+    transform: scale(1.1);
+
+}
+.nav-dashboard a img{
+    width: 35px;
+    margin-top: 10px;
+}
+.nav-dashboard a img:hover{
+    background-color: #171717;
+    border-radius: 5px;
+    transform: scale(1.1); 
+}
+.container-menu img {
+    width: 35px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+.container-menu img:hover {
+    border-radius: 5px;
+    transform: scale(1.05); 
+    cursor: pointer;
+}
+.container-menu img:hover, .container-menu img.active {
+    transform: scale(1.2); 
+    filter: invert(1);
+}
+.logo img {
+    width: 35px;
+    filter: invert(1); 
+    transition: filter 0.3s ease-in-out;
+}
+.logo img:hover {
+    transform: scale(1.2); /* Aumenta el tamaño sin afectar el flujo del documento */
+    cursor: pointer;
+}
+
+.container-main {
+    flex: 1; /* Permite que el contenido principal ocupe el resto del espacio */
+    /* margin-left: 270px; 🔹 Desplaza el contenido principal para que no se solape con la barra */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Asegura que el contenido fluya hacia abajo */
+    overflow-y: auto; /* Permite el scroll cuando el contenido es largo */
+    padding: 20px;
+    background-color: #0e0d0d;
+    width: 80%;
+}
+
+.post-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid white;
+    width: 60%;
+    border-radius: 20px 20px 0px 0px;
+    background-color:  #171717;
+
+}
+
+.container-btnFloating {
+    position: fixed;  
+    bottom: 20px; 
+    right: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    width: 82px;
+    height: auto; /* ✅ Cambiado de 100vh a auto para que solo ocupe el espacio necesario */
+    
+}
+
+.btn-floating {
+    width: 82px;
+    height: 68px;
+    background-color: #171717;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+.container-btnFloating  button {
+    margin: 0px 40px 20px 0px;
+    width: 100%;
+    background-color: #171717;
+    border: solid 1px #373838;
+    border-radius: 15px;
+}
+
+.btn-floating img {
+    width: 35px; /* Ajusta el tamaño de la imagen */
+    
+}
+.btn-floating:hover {
+    transform: scale(1.1); 
+    
+}
