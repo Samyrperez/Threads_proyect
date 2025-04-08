@@ -1,62 +1,91 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef  } from "react";
 import "../css/styles_darshboard.css";
-import homeDark from "../image/home_dark.png";
-import homeWhite from "../image/home.png";
-import searchDark from "../image/search_dark.png";
-import searchWhite from "../image/search.png";
-import addDark from "../image/add_dark.png";
-import addWhite from "../image/add.png";
-import favoriteDark from "../image/favorite_dark.png";
-import favoriteWhite from "../image/favorite.png";
-import personDark from "../image/person_dark.png";
-import personWhite from "../image/person.png";
+import ThreadsLogo from "../components/ThreadsLogo";
+import MenuIcon from "../components/MenuIcon";
+import Sidebar from "../components/Sidebar";
+import LogoSplash from "../components/LogoSplash";
+import DropdownMenu from "../components/DropdownMenu";
+
 
 
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
-    const [active, setActive] = useState(null);
+    const [active, setActive] = useState("home");
+    const [showLogo, setShowLogo] = useState(true);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const dropdownRef = useRef(null);
+    const toggleRef = useRef(null);
+
 
     useEffect(() => {
-        // Simulación de usuario autenticado (Aquí puedes conectar con la API más adelante)
+        // Simulación de usuario autenticado (esto debería ser reemplazado por la lógica real de autenticación)
+        // Aquí puedes obtener el usuario de un servicio o contexto global
+        // Por ejemplo, usando localStorage o un contexto de React
+        
         setUser({
             username: "SamCode",
             email: "sam@example.com",
             avatar: "https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg",
         });
+        const timer = setTimeout(() => {
+            setShowLogo(false); // Oculta el logo después de 2 segundos
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                toggleRef.current &&
+                !toggleRef.current.contains(event.target)
+            ) {
+                setShowDropdown(false);
+            }
+        };
+    
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, []);
     
+    const toggleDropdown = () => {
+        setShowDropdown(prev => !prev);
+    };
+
 
     return (
         <div className="dashboard-container">
-            <div className="contaner-sidebar">
-                <div className="logo">
-                    <img src="https://images.seeklogo.com/logo-png/48/2/threads-logo-png_seeklogo-489791.png" alt="" />
+            
+            {/* Logo de Threads que aparece al inicio  */}
+            {showLogo && <LogoSplash onClick={() => setShowLogo(false)} />}
+
+
+            <div className="logoAndMenu">
+                <div className="logo-responsive">
+                    <ThreadsLogo />
                 </div>
-                <nav className="nav-dashboard">
-                    <a href="#" onClick={() => setActive("home")}>
-                        <img src={active === "home" ? homeWhite : homeDark} alt="Home" />
-                    </a>
-                    <a href="#" onClick={() => setActive("search")}>
-                        <img src={active === "search" ? searchWhite : searchDark} alt="Buscar" />
-                    </a>
-                    <a href="#" onClick={() => setActive("add")}>
-                        <img src={active === "add" ? addWhite : addDark} alt="Agregar" />
-                    </a>
-                    <a href="#" onClick={() => setActive("favorite")}>
-                        <img src={active === "favorite" ? favoriteWhite : favoriteDark} alt="Favorito" />
-                    </a>
-                    <a href="#" onClick={() => setActive("profile")}>
-                        <img src={active === "profile" ? personWhite : personDark} alt="Perfil" />
-                    </a>
-                </nav>
-                <div className="container-menu">
-                    <img src="./src/image/menu_dark.png"
-                    alt="Menú" 
-                    />
+                <div className="menu-responsive" ref={toggleRef}  onClick={toggleDropdown}>
+                    <MenuIcon active={showDropdown} />
                     
                 </div>
+
+                {showDropdown && <DropdownMenu dropdownRef={dropdownRef} />}
+            
             </div>
+
+{/* Containers barra de contenido, main y btn-add */}
+            <Sidebar
+                active={active}
+                setActive={setActive}
+                showDropdown={showDropdown}
+                toggleDropdown={toggleDropdown}
+                dropdownRef={dropdownRef}
+                toggleRef={toggleRef}
+            />
             
             <div className="container-main">
                 <div className="post-box">
@@ -72,8 +101,8 @@ const Dashboard = () => {
                     </a>
                 </button>
             </div>
-
         </div>
+
     );
 };
 
