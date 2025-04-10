@@ -1,4 +1,4 @@
-const TabProfile = () => {
+const TabHilos = () => {
     return (
         <div>
             <p>Estos son tus hilos ✨</p>
@@ -7,4 +7,4 @@ const TabProfile = () => {
     );
 };
 
-export default TabProfile;
+export default TabHilos;

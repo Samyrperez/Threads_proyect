@@ -1,18 +1,17 @@
 
 .profile-tabs {
     width: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    
     margin-top: 1rem;
 }
 .tabs-container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    
+    justify-content: space-around;
     margin-top: 20px;
 }
 .tab-buttons {

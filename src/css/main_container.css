@@ -3,7 +3,7 @@
 .container-main {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     padding: 17px;
     width: 100%;
@@ -96,4 +96,9 @@
     border: 1px solid #333;
     margin: 0;
     
+}
+@media screen and (max-width: 768px){
+    .container-main {
+        margin: 0;
+    }
 }

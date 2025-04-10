@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../../css/profile.css";
 import "../../../css/Tabs.css";
-import TabProfile from "./TabProfile";
+import TabHilos from "./TabHilos";
 import TabReposts from "./TabReposts";
 import TabRespuestas from "./TabRespuestas";
 
@@ -13,7 +13,7 @@ const Tabs = () => {
     const renderContent = () => {
         switch (activeTab) {
             case "hilos":
-        return <TabProfile />;
+        return <TabHilos />;
         case "respuestas":
             return <TabRespuestas />;
         case "reposts":

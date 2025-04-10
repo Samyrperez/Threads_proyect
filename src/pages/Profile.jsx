@@ -44,7 +44,7 @@ const Profile = () => {
                 
             </div>
 
-            {/* Tabs - no funcional aún */}
+            
             <div className="profile-tabs">
                 <Tabs />
             </div>
