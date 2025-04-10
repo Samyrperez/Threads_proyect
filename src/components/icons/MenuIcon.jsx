@@ -1,5 +1,4 @@
 const MenuIcon = ({ active }) => {
-    console.log("MoreIcon está activo?", active);
 
     return (
         <svg

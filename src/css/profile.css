@@ -1,0 +1,87 @@
+.profile-container {
+    width: 60%;
+    margin: 0 auto;
+    color: white;
+    background: #111; 
+    border-radius: 16px;
+    padding: 1rem;
+    font-family: system-ui, sans-serif;
+    background-color: #171717;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: system-ui, sans-serif;
+}
+
+.profile-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex: 1;
+}
+.profile-info h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+
+.username {
+    color: #777777;
+    margin-top: -8px;
+}
+.profile-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.bio {
+    white-space: pre-wrap;
+    margin: 0.5rem 0;
+    font-size: 14px;
+    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.followers {
+    margin-bottom: 0.5rem;
+    color: #777777;
+}
+
+.badges span {
+    margin-right: 8px;
+}
+
+.edit-btn {
+    width: 100%;
+    background: none;
+    border: 1px solid gray;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    margin: 0 auto;
+    cursor: pointer;
+    size: bold;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+

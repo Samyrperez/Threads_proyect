@@ -1,0 +1,72 @@
+.post-box {
+    background-color: #201f1f;
+    border-radius: 15px 15px 0px 0px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid #333;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.post-box img.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.post-box p {
+    flex: 1;
+    color: #aaa;
+    margin: 0;
+}
+
+.post-box button {
+    background-color: #3a3a3a;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.post-box button:hover {
+    background-color: #555;
+}
+
+.post-box-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-box-header input {
+    flex: 1;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.post-box-actions {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.post-box-actions button {
+    background-color: transparent;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    size: bold;
+    cursor: pointer;
+}

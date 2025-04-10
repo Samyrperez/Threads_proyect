@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef  } from "react";
-import "../css/styles_darshboard.css";
-import ThreadsLogo from "../components/ThreadsLogo";
-import MenuIcon from "../components/MenuIcon";
-import Sidebar from "../components/Sidebar";
-import LogoSplash from "../components/LogoSplash";
-import DropdownMenu from "../components/DropdownMenu";
+import "../css/styles_dashboard.css";
+import ThreadsLogo from "../components/dashboard/ThreadsLogo";
+import MenuIcon from "../components/icons/MenuIcon";
+import Sidebar from "../components/dashboard/Sidebar";
+import LogoSplash from "../components/dashboard/LogoSplash";
+import DropdownMenu from "../components/dashboard/DropdownMenu";
+import MainContainer from "../components/dashboard/MainConatiner";
+import AddIcon from "../components/icons/AddIcon";
 
 
 
@@ -58,6 +60,8 @@ const Dashboard = () => {
 
 
     return (
+
+    <>
         <div className="dashboard-container">
             
             {/* Logo de Threads que aparece al inicio  */}
@@ -87,22 +91,20 @@ const Dashboard = () => {
                 toggleRef={toggleRef}
             />
             
-            <div className="container-main">
-                <div className="post-box">
-                    {user && <img src={user.avatar} alt="Avatar" className="avatar" />}
-                    <p>¿Qué hay de nuevo?</p>
-                    <button>Publicar</button>
-                </div>
-            </div>
+            <MainContainer user={user} active={active} />
+
+
             <div className="container-btnFloating">
                 <button className="btn-floating">
                     <a href="">
-                        <img src="./src/image/add.png" alt="add"/>
+                        <AddIcon/>
                     </a>
                 </button>
             </div>
         </div>
 
+    </>
+        
     );
 };
 

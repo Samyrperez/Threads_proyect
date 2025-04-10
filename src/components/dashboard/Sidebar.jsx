@@ -1,12 +1,12 @@
 
 import ThreadsLogo from "./ThreadsLogo";
-import HomeIcon from "./HomeIcon";
-import SearchIcon from "./SearchIcon";
-import AddIcon from "./AddIcon";
+import HomeIcon from "../icons/HomeIcon";
+import SearchIcon from "../icons/SearchIcon";
+import AddIcon from "../icons/AddIcon";
 import FavoriteIcon from "./FavoriteIcon";
-import ProfileIcon from "./ProfileIcon";
-import MenuIcon from "./MenuIcon";
-import DropdownMenu from "../components/DropdownMenu";
+import ProfileIcon from "../icons/ProfileIcon";
+import MenuIcon from "../icons/MenuIcon";
+import DropdownMenu from "./DropdownMenu";
 
 
 const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef, toggleRef }) => {

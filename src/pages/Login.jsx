@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+
 import "../css/styles.css"; // Importa el archivo CSS
 
 const Login = () => {
@@ -7,6 +9,8 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showLogo, setShowLogo] = useState(true);
+    const navigate = useNavigate();
+
     
         useEffect(() => {
             const timer = setTimeout(() => {
@@ -19,7 +23,14 @@ const Login = () => {
         e.preventDefault();
         setError("");
 
-        console.log("Intentando iniciar sesión con:", input, password);
+        // Validación simple simulada
+    if (input === "samyr.perezpabon@gmail.com" && password === "samperez0819") {
+        console.log("Login exitoso");
+        navigate("/dashboard"); // Redirige al dashboard
+    } else {
+        setError("Credenciales incorrectas. Intenta nuevamente.");
+    }
+
 
         // Aquí puedes manejar la autenticación cuando integres el backend
     } 
