@@ -1,0 +1,70 @@
+.tareas-perfil {
+    
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 16px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.tareas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #ccc;
+}
+
+.tareas-lista {
+    display: flex;
+    
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.tarea-card {
+    background-color: #201f1f;
+    width: 40%;
+    height: 250px;
+    padding: 14px;
+    border-radius: 20px;
+    flex: 1;
+    text-align: center;
+    color: #fff;
+}
+.tarea-card p{
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarea-icono {
+    margin-bottom: 12px;
+}
+
+.btn-tarea {
+    margin-top: 12px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-tarea.crear {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-tarea.listo {
+    background-color: #1c1c1c;
+    color: #aaa;
+    border: 1px solid #444;
+}
