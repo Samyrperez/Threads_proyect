@@ -1,5 +1,5 @@
 .publicar-container {
-    padding: 1rem;
+    padding: 1rem 0;
     border-bottom: 1px solid #333;
     background-color: #171717;
 }
@@ -32,8 +32,6 @@
     outline: none;
     
 }
-
-
 
 .btn-publicar:hover {
     background-color: #444;

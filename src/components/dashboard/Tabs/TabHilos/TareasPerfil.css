@@ -35,6 +35,10 @@
     flex: 1;
     text-align: center;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 .tarea-card p{
     font-size: 14px;
@@ -44,19 +48,26 @@
     justify-content: center;
     align-items: center;
 }
-
-.tarea-icono {
-    margin-bottom: 12px;
-}
-
-.btn-tarea {
-    margin-top: 12px;
-    padding: 8px 16px;
+.tarea-card button {
+    width: 100%;
+    padding: 10px 16px;
     border: none;
     border-radius: 18px;
     font-weight: bold;
     cursor: pointer;
 }
+.tarea-icono {
+    margin-bottom: 12px;
+    background-color: #131212;
+    border-radius: 50%;
+    padding: 10px;
+    transition: transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 
 .btn-tarea.crear {
     background-color: #fff;

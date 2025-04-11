@@ -20,7 +20,7 @@ const tareas = [
         icono: <IconoCheck />,
     },
     {
-        titulo: "Añadir foto del perfil",
+        titulo: "Añadir biografia",
         descripcion: "Facilita que los demás te reconozcan.",
         estado: "Listo",
         icono: <IconoCheck />,

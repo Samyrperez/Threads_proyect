@@ -1,7 +1,8 @@
 .profile-container {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 70%;
+    /* min-height: auto; */
     margin: 0 auto;
     color: white;
     background: #111; 
@@ -9,6 +10,8 @@
     padding: 1rem;
     font-family: system-ui, sans-serif;
     background-color: #171717;
+    overflow-y: visible;
+    
 }
 
 .profile-header {
