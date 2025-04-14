@@ -1,8 +1,10 @@
 // TareasPerfil.jsx
+import { useState } from "react";
 import React from "react";
 import  {IconoCrearHilo} from "../../../icons/IconoCrearHilo";
 import {IconoCheck} from "../../../icons/IconoCheck";
 import "./TareasPerfil.css";
+import ModalHilo from "./ModalHilo";
 
 
 
@@ -27,27 +29,48 @@ const tareas = [
     }
 ];
 
+
+
 const TareasPerfil = () => {
+
+    const [mostrarModal, setMostrarModal] = useState(false);
+
+    const handleCrearClick = () => {
+        setMostrarModal(true);
+    };
+
     return (
         <div className="tareas-perfil">
             <div className="tareas-header">
                 <span>Finaliza tu perfil</span>
-                
             </div>
+
             <div className="tareas-lista">
                 {tareas.map((tarea, index) => (
                     <div key={index} className="tarea-card">
                         <div className="tarea-icono">{tarea.icono}</div>
                         <h4>{tarea.titulo}</h4>
                         <p>{tarea.descripcion}</p>
-                        <button
-                            className={`btn-tarea ${tarea.estado === "Crear" ? "crear" : "listo"}`}
-                        >
-                            {tarea.estado}
-                        </button>
+                        {tarea.estado === "Crear" ? (
+                            <button className="btn-tarea crear" onClick={handleCrearClick}>
+                                Crear
+                            </button>
+                        ) : (
+                            <button className="btn-tarea listo" disabled>
+                                Listo
+                            </button>
+                        )}
                     </div>
                 ))}
             </div>
+
+            {mostrarModal && (
+                <ModalHilo
+                    onClose={() => setMostrarModal(false)}
+                    setMostrarModal={setMostrarModal}
+                    avatar="https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg"
+                />
+            )}
         </div>
     );
 };

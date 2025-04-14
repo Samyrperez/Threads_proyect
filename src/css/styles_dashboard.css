@@ -131,7 +131,15 @@ p {
     align-items: center;
     padding: 0px 12px;
     border-radius: 10px;
+    
 }
+/* .nav-dashboard a svg {
+    width: 24px;
+    height: 24px;
+    color: #525252;
+    
+    transition: transform 0.2s ease;
+} */
 
 .nav-dashboard a:hover {
     background-color: #171717;
@@ -203,14 +211,15 @@ p {
 
 }
 
-.btn-floating {
-    width: 82px;
+.container-btnFloating button {
+    width: 68px;
     height: 68px;
     background-color: #171717;
     border-radius: 15px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
     border: none;
     cursor: pointer;
 }
@@ -265,7 +274,7 @@ p {
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: #171717;
+        background-color: #0e0d0d;
         
         
     }
@@ -365,7 +374,7 @@ p {
     }
     .menu-dropdown {
         position: fixed;
-        top: 290px;
+        top: 290px;   
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         border-radius: 20px;
         padding: 10px;

@@ -1,7 +1,10 @@
 import { useState } from "react";
+import EditarPerfilModal from "../components/dashboard/Profile/EditarPerfilModal";
+// import "../components/dashboard/Profile/EditarPerfilModal.css";
 import Tabs from "../components/dashboard/Tabs/Tabs";
 import "../../src/css/profile.css";
 import "../../src/css/Tabs.css";
+
 
 const fakeUser = {
     name: "Samyr Perez",
@@ -14,9 +17,19 @@ const fakeUser = {
     badges: ["📷", "🔗"],
 };
 
-const Profile = () => {
 
-    const { name, username, avatar, bio, followers, badges } = fakeUser;
+
+const Profile = () => {
+    const [modalAbierto, setModalAbierto] = useState(false);
+
+    const { name, username, avatar, bio, followers } = fakeUser;
+
+    const abrirModal = () => setModalAbierto(true);
+    const cerrarModal = () => setModalAbierto(false);
+    const guardarCambios = () => {
+        // Aquí irá lógica para guardar cuando tengas API
+        cerrarModal();
+    };
 
     return (
         <div className="profile-container">
@@ -34,15 +47,17 @@ const Profile = () => {
                     <div className="bio">{bio}</div>
                     
                     <p className="followers">👥 {followers} seguidores</p>
-                    {/* <div className="badges">
-                        {badges.map((b, i) => (
-                            <span key={i}>{b}</span>
-                        ))}
-                    </div> */}
-                    <button className="edit-btn">Editar perfil</button>
+                    <button className="edit-btn" onClick={abrirModal}>Editar perfil</button>
                 </div>
                 
             </div>
+
+            <EditarPerfilModal
+                isOpen={modalAbierto}
+                onClose={cerrarModal}
+                user={fakeUser}
+                onSave={guardarCambios}
+            />
 
             
             <div className="profile-tabs">

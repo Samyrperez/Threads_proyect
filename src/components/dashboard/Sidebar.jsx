@@ -9,7 +9,7 @@ import MenuIcon from "../icons/MenuIcon";
 import DropdownMenu from "./DropdownMenu";
 
 
-const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef, toggleRef }) => {
+const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef, toggleRef, onAddClick }) => {
     return (
         <div className="container-sidebar">
             <div className="logo">
@@ -20,9 +20,13 @@ const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef,
                     <HomeIcon active={active === "home"} />
                 </a>
                 <a href="#" onClick={() => setActive("search")}>
-                    <SearchIcon active={active === "search"} />
+                <SearchIcon active={active === "search"} />
+
                 </a>
-                <a href="#" onClick={() => setActive("add")}>
+                <a href="#" onClick={() => {
+                    setActive("add");
+                    onAddClick(); // 👉 Mostrar modal
+                }}>
                     <AddIcon active={active === "add"} />
                 </a>
                 <a href="#" onClick={() => setActive("favorite")}>

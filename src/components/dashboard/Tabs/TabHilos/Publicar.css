@@ -10,6 +10,20 @@
     justify-content: space-between;
     gap: 1rem;
 }
+.publicar-header button  {
+    background: none !important;
+    /* color: #aaa; */
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: solid 1px #333;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+button{
+    color: #fff;
+    size: bold;
+}
 
 .avatar-publicar {
     width: 40px;
@@ -32,7 +46,17 @@
     outline: none;
     
 }
-
-.btn-publicar:hover {
-    background-color: #444;
+/* .publicar {
+    background-color: #3a3a3a;
+    color: #aaa;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
 }
+.publicar:hover {
+    background-color: #444;
+} */
+

@@ -1,0 +1,42 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+    background-color: #171717;
+    overflow-x: none !important;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.home-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    overflow: hidden;
+}
+.scroll-publicaciones {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-top: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: none !important;
+    overflow-x: hidden !important;
+}
+@media screen and (max-width: 768px){
+    .home-container {
+        width: 90%;
+        margin-top: 100px;
+    }
+        
+}

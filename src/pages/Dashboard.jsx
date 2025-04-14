@@ -7,7 +7,8 @@ import LogoSplash from "../components/dashboard/LogoSplash";
 import DropdownMenu from "../components/dashboard/DropdownMenu";
 import MainContainer from "../components/dashboard/MainConatiner";
 import AddIcon from "../components/icons/AddIcon";
-
+import ModalHilo from "../components/dashboard/Tabs/TabHilos/ModalHilo";
+import "../components/dashboard/Tabs/TabHilos/ModalHilo.css";
 
 
 
@@ -16,9 +17,12 @@ const Dashboard = () => {
     const [active, setActive] = useState("home");
     const [showLogo, setShowLogo] = useState(true);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [mostrarModal, setMostrarModal] = useState(false);
     const dropdownRef = useRef(null);
     const toggleRef = useRef(null);
 
+    const abrirModal = () => setMostrarModal(true);
+    const cerrarModal = () => setMostrarModal(false);
 
     useEffect(() => {
         // Simulación de usuario autenticado (esto debería ser reemplazado por la lógica real de autenticación)
@@ -58,7 +62,7 @@ const Dashboard = () => {
         setShowDropdown(prev => !prev);
     };
 
-
+    
     return (
 
     <>
@@ -89,19 +93,26 @@ const Dashboard = () => {
                 toggleDropdown={toggleDropdown}
                 dropdownRef={dropdownRef}
                 toggleRef={toggleRef}
+                onAddClick={abrirModal}
             />
             
             <MainContainer user={user} active={active} />
 
 
-            <div className="container-btnFloating">
-                <button className="btn-floating">
-                    <a href="">
-                        <AddIcon/>
-                    </a>
-                </button>
-            </div>
+                <div className="container-btnFloating">
+
+                    <button className="btn-floating" onClick={abrirModal}>
+                        <AddIcon />
+                    </button>
+                    
+                </div>
+                
+
+                
         </div>
+            {mostrarModal && (
+                <ModalHilo avatar={user?.avatar} onClose={cerrarModal} />
+            )}
 
     </>
         
