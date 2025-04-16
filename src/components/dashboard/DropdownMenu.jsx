@@ -1,7 +1,7 @@
 // src/components/DropdownMenu.jsx
 import React from "react";
 
-const DropdownMenu = ({ dropdownRef }) => {
+const DropdownMenu = ({ dropdownRef, onLogout }) => {
     return (
         <div className="menu-dropdown" ref={dropdownRef}>
             <ul>
@@ -9,7 +9,9 @@ const DropdownMenu = ({ dropdownRef }) => {
                 <li><a href="#">Insights</a></li>
                 <li><a href="#">Configuración</a></li>
                 <li><a href="#">Informar de un problema</a></li>
-                <li><a href="#">Cerrar sesión</a></li>
+                <li onClick={onLogout}>
+                    <a href="#">Cerrar sesión</a>
+                </li>
             </ul>
         </div>
     );

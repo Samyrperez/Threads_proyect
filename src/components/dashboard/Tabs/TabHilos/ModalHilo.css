@@ -117,6 +117,7 @@
 }
 
 textarea {
+    all: unset;
     background: transparent;
     border: none;
     outline: none;
@@ -134,24 +135,26 @@ textarea {
     gap: 30px;
 }
 
-.container-anadir-hilo a {
+/* .container-anadir-hilo a {
     text-decoration: none;
     color: #444;
     cursor: pointer;
+} */
+.anadir-hilo.deshabilitado  {
+    color: #444;
 }
-
-.anadir-hilo.deshabilitado {
+.anadir-hilo{
     color: #aaa;
-    pointer-events: none;
+    /* pointer-events: none; */
     cursor: default;
     text-decoration: none;
 }
 
-.anadir-hilo-ancla {
+/* .anadir-hilo-ancla {
     display: flex;
     align-items: center;
     gap: 10px;
-}
+} */
 
 
 .cabecera-hilo {
@@ -190,12 +193,14 @@ textarea {
 }
 
 .btn-publicar {
-    background-color: #3a3a3a;
+    background-color: #2b2a2a;
     color: #aaa;
     padding: 8px 16px;
     border-radius: 20px;
     border: none;
     cursor: pointer;
+    all: unset;
+    font-size: 14px;
 }
 
 .preview-imagen {

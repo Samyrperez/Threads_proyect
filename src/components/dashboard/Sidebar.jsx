@@ -1,4 +1,4 @@
-
+import { useNavigate } from "react-router-dom";
 import ThreadsLogo from "./ThreadsLogo";
 import HomeIcon from "../icons/HomeIcon";
 import SearchIcon from "../icons/SearchIcon";
@@ -10,6 +10,13 @@ import DropdownMenu from "./DropdownMenu";
 
 
 const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef, toggleRef, onAddClick }) => {
+    const navigate = useNavigate();
+
+    const cerrarSesion = () => {
+        localStorage.removeItem("usuario");
+        navigate("/login");
+    };
+    
     return (
         <div className="container-sidebar">
             <div className="logo">
@@ -29,8 +36,8 @@ const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef,
                 }}>
                     <AddIcon active={active === "add"} />
                 </a>
-                <a href="#" onClick={() => setActive("favorite")}>
-                    <FavoriteIcon active={active === "favorite"} />
+                <a href="#" onClick={() => setActive("favorites")}>
+                    <FavoriteIcon active={active === "favorites"} />
                 </a>
                 <a href="#" onClick={() => setActive("profile")}>
                     <ProfileIcon active={active === "profile"} />
@@ -38,7 +45,7 @@ const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef,
             </nav>
             <div className="container-menu" ref={toggleRef} onClick={toggleDropdown}>
                 <MenuIcon active={showDropdown} />
-                {showDropdown && <DropdownMenu dropdownRef={dropdownRef} />}
+                {showDropdown && <DropdownMenu dropdownRef={dropdownRef} onLogout={cerrarSesion} />}
             </div>
         </div>
     );

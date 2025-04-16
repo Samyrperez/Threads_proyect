@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-
 import "../css/styles.css"; // Importa el archivo CSS
 
 const Login = () => {
@@ -19,22 +18,61 @@ const Login = () => {
             return () => clearTimeout(timer);
         }, []);
 
+        const usuarioSimulado = {
+            email: "samyr.perezpabon@gmail.com",
+            password: "samperez0819",
+            username: "samperez",
+            name: "Samyr Perez"
+        };
+        
     async function handleLogin(e) {
         e.preventDefault();
         setError("");
 
-        // Validación simple simulada
-    if (input === "samyr.perezpabon@gmail.com" && password === "samperez0819") {
-        console.log("Login exitoso");
-        navigate("/dashboard"); // Redirige al dashboard
-    } else {
-        setError("Credenciales incorrectas. Intenta nuevamente.");
+        // Simulación de login con datos locales
+        if (
+            (input === usuarioSimulado.email || input === usuarioSimulado.username) &&
+            password === usuarioSimulado.password
+        ) {
+            console.log("Login exitoso");
+
+            // Guardamos al usuario simulado en localStorage
+            localStorage.setItem("usuario", JSON.stringify(usuarioSimulado));
+
+             // Limpiar formulario
+            setInput("");
+            setPassword("");
+
+            // Redirigimos al home
+            navigate("/dashboard");
+
+        } else {
+            setError("Credenciales incorrectas. Intenta nuevamente.");
+        }
+
+        
+        // try {
+        //   const response = await fetch("http://localhost:3000/api/login", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({ email: input, password }),
+        //   });
+        //
+        //   const data = await response.json();
+        //
+        //   if (response.ok) {
+        //     localStorage.setItem("usuario", JSON.stringify(data.usuario));
+        //     navigate("/home");
+        //   } else {
+        //     setError(data.mensaje);
+        //   }
+        // } catch (error) {
+        //   console.error("Error en el login:", error);
+        //   setError("Ocurrió un error al intentar iniciar sesión.");
+        // }
     }
 
-
-        // Aquí puedes manejar la autenticación cuando integres el backend
-    } 
-
+    
     return (
         <div className="page-container">
             {showLogo && (
@@ -45,7 +83,7 @@ const Login = () => {
                         className="center-logo"
                     />
                 </div>
-            )};
+            )}
             <div className="login-container">
                 <div className="login-box">
                     <img

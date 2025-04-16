@@ -2,8 +2,10 @@ import { useState } from "react";
 import EditarPerfilModal from "../components/dashboard/Profile/EditarPerfilModal";
 // import "../components/dashboard/Profile/EditarPerfilModal.css";
 import Tabs from "../components/dashboard/Tabs/Tabs";
+import ModalAvatar from "../components/dashboard/Profile/ModalAvatar";
 import "../../src/css/profile.css";
 import "../../src/css/Tabs.css";
+
 
 
 const fakeUser = {
@@ -21,9 +23,8 @@ const fakeUser = {
 
 const Profile = () => {
     const [modalAbierto, setModalAbierto] = useState(false);
-
     const { name, username, avatar, bio, followers } = fakeUser;
-
+    const [showModal, setShowModal] = useState(false);
     const abrirModal = () => setModalAbierto(true);
     const cerrarModal = () => setModalAbierto(false);
     const guardarCambios = () => {
@@ -40,7 +41,18 @@ const Profile = () => {
                         <p className="username">@{username}</p>
                     </div>
                     <div className="avatar-image">
-                        <img src={avatar} alt="avatar" className="avatar" />
+                        <img 
+                            src={avatar} 
+                            alt="avatar" 
+                            className="avatar"
+                            onClick={() => setShowModal(true)} 
+                        />
+                        {showModal && (
+                            <ModalAvatar
+                                imageUrl={fakeUser.avatar}
+                                onClose={() => setShowModal(false)}
+                            />
+                        )}
                     </div>
                 </div>
                 <div className="profile-details">

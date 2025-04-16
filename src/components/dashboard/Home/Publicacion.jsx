@@ -4,19 +4,24 @@ import HeartIcon from "../../icons/HeartIcon";
 import CommentIcon from "../../icons/CommentIcon";
 import RepostIcon from "../../icons/RepostIcon";
 import SaveIcon from "../../icons/SaveIcon";
+import ModalPerfilUsuario from "../Home/ModalPerfilUsuario"
+;
 
 
 
 const Publicacion = ({ usuario, tiempo, texto, imagen, likes, respuestas, compartidos, guardados }) => {
     const [liked, setLiked] = useState(false);
 
+    const [modalAbierto, setModalAbierto] = useState(false);
+
     return (
         <div className="post">
 
             <div className="container-posts">
-                <div className="post-avatar">
+                <div className="post-avatar" onClick={() => setModalAbierto(true)} style={{ cursor: "pointer" }}>
                     <img src={usuario.avatar} className="avatar" alt="avatar" />
                 </div>
+
 
                 <div className="post-body">
 
@@ -57,9 +62,16 @@ const Publicacion = ({ usuario, tiempo, texto, imagen, likes, respuestas, compar
                 </div>
             </div>
 
-            
+            {modalAbierto && (
+                <ModalPerfilUsuario
+                    usuario={usuario}
+                    onClose={() => setModalAbierto(false)}
+                />
+            )}
+
 
         </div>
+        
     );
 };
 

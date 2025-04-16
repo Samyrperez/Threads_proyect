@@ -19,26 +19,7 @@
     
 }
 
-/* .post {
-    background-color: #1c1c1c;
-    border-radius: 15px;
-    padding: 1rem;
-    color: white;
-    border: 1px solid #333;
-} */
 
-/* .post-header {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-bottom: 0.5rem;
-} */
-
-/* .post-header img.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-} */
 
 .post-info {
     display: flex;

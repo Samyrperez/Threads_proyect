@@ -53,22 +53,21 @@ const publicaciones = [
 
 
 
-const fakeUser = {
-    name: "Samyr Perez",
-    username: "sammmperezz",
-    email: "sam@example.com",
-    avatar:
-        "https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg",
-    bio: "Ingeniero ambiental y sanitario\n💍 @lola_rodriguezz\nS&Y ❤️\n🧍‍♂️🎵🎸",
-    followers: 78,
-    badges: ["📷", "🔗"],
-};
-
-
-
-const Home = () => {
+const Home = ({ user }) => {
+    const fakeUser = {
+        name: user?.name || "Invitado",
+        username: user?.username || "guest",
+        email: user?.email || "guest@example.com",
+        avatar:
+            user?.avatar ||
+            "https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg",
+        bio: "Ingeniero ambiental y sanitario\n💍 @lola_rodriguezz\nS&Y ❤️\n🫍‍♂️🎵🎸",
+        followers: 78,
+        badges: ["📷", "🔗"]
+    };
 
     return (
+
         <div className="home-container">
             <Publicar avatar={fakeUser.avatar} />
 

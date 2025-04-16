@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef  } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "../css/styles_dashboard.css";
 import ThreadsLogo from "../components/dashboard/ThreadsLogo";
 import MenuIcon from "../components/icons/MenuIcon";
@@ -16,14 +18,26 @@ const Dashboard = () => {
     const [user, setUser] = useState(null);
     const [active, setActive] = useState("home");
     const [showLogo, setShowLogo] = useState(true);
-    const [showDropdown, setShowDropdown] = useState(false);
     const [mostrarModal, setMostrarModal] = useState(false);
-    const dropdownRef = useRef(null);
-    const toggleRef = useRef(null);
+    const [showDropdownDesktop, setShowDropdownDesktop] = useState(false);
+    const [showDropdownMobile, setShowDropdownMobile] = useState(false);
+
+    const dropdownDesktopRef = useRef(null);
+    const toggleDesktopRef = useRef(null);
+
+    const dropdownMobileRef = useRef(null);
+    const toggleMobileRef = useRef(null);
+
 
     const abrirModal = () => setMostrarModal(true);
     const cerrarModal = () => setMostrarModal(false);
+    const navigate = useNavigate();
 
+    const cerrarSesion = () => {
+        localStorage.removeItem("usuario");
+        navigate("/login");
+    };
+    
     useEffect(() => {
         // Simulación de usuario autenticado (esto debería ser reemplazado por la lógica real de autenticación)
         // Aquí puedes obtener el usuario de un servicio o contexto global
@@ -42,13 +56,24 @@ const Dashboard = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
+            // Cierra menú escritorio
             if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target) &&
-                toggleRef.current &&
-                !toggleRef.current.contains(event.target)
+                dropdownDesktopRef.current &&
+                !dropdownDesktopRef.current.contains(event.target) &&
+                toggleDesktopRef.current &&
+                !toggleDesktopRef.current.contains(event.target)
             ) {
-                setShowDropdown(false);
+                setShowDropdownDesktop(false);
+            }
+    
+            // Cierra menú móvil
+            if (
+                dropdownMobileRef.current &&
+                !dropdownMobileRef.current.contains(event.target) &&
+                toggleMobileRef.current &&
+                !toggleMobileRef.current.contains(event.target)
+            ) {
+                setShowDropdownMobile(false);
             }
         };
     
@@ -58,41 +83,40 @@ const Dashboard = () => {
         };
     }, []);
     
-    const toggleDropdown = () => {
-        setShowDropdown(prev => !prev);
-    };
-
-    
     return (
 
-    <>
-        <div className="dashboard-container">
-            
-            {/* Logo de Threads que aparece al inicio  */}
-            {showLogo && <LogoSplash onClick={() => setShowLogo(false)} />}
+        <>
+            <div className="dashboard-container">
 
+                {/* Logo Threads del inicio  */}
+                {showLogo && <LogoSplash onClick={() => setShowLogo(false)} />}
 
-            <div className="logoAndMenu">
-                <div className="logo-responsive">
-                    <ThreadsLogo />
+                <div className="logoAndMenu">
+                    <div
+                        className="menu-responsive"
+                        ref={toggleMobileRef}
+                        onClick={() => setShowDropdownMobile(prev => !prev)}
+                    >
+                        <MenuIcon active={showDropdownMobile} />
+                    </div>
+
+                    {showDropdownMobile && (
+                        <DropdownMenu
+                            dropdownRef={dropdownMobileRef}
+                            onLogout={cerrarSesion}
+                        />
+                    )}
+
                 </div>
-                <div className="menu-responsive" ref={toggleRef}  onClick={toggleDropdown}>
-                    <MenuIcon active={showDropdown} />
-                    
-                </div>
-
-                {showDropdown && <DropdownMenu dropdownRef={dropdownRef} />}
-            
-            </div>
 
 {/* Containers barra de contenido, main y btn-add */}
             <Sidebar
                 active={active}
                 setActive={setActive}
-                showDropdown={showDropdown}
-                toggleDropdown={toggleDropdown}
-                dropdownRef={dropdownRef}
-                toggleRef={toggleRef}
+                showDropdown={showDropdownDesktop}
+                toggleDropdown={() => setShowDropdownDesktop(prev => !prev)}
+                dropdownRef={dropdownDesktopRef}
+                toggleRef={toggleDesktopRef}
                 onAddClick={abrirModal}
             />
             
@@ -108,7 +132,6 @@ const Dashboard = () => {
                 </div>
                 
 
-                
         </div>
             {mostrarModal && (
                 <ModalHilo avatar={user?.avatar} onClose={cerrarModal} />

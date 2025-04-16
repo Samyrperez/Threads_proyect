@@ -3,11 +3,11 @@
     flex-direction: column;
     width: 70%;
     /* min-height: auto; */
-    margin: 0 auto;
-    margin-top: 180px;
+    margin: 180px auto 0px auto;
+    /* margin-top: 180px; */
     color: white;
     border-radius: 16px;
-    padding: 1rem;
+    padding: 8px;
     font-family: system-ui, sans-serif;
     background-color: #171717;
     overflow: hidden;
@@ -75,7 +75,7 @@
     color: white;
     padding: 0.4rem 1rem;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 10px auto -20px auto;
     cursor: pointer;
     size: bold;
     font-weight: 600;
