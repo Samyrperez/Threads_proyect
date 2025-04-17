@@ -1,17 +1,18 @@
-const API_URL = "http://localhost:3000/api";
+const API_URL = "http://localhost:3000/api"; // Cambia según tu entorno
 
-export const editarPerfil = async (perfilActualizado) => {
+export const editarPerfil = async (datosActualizados) => {
     try {
         const response = await fetch(`${API_URL}/perfil`, {
-            method: "PUT",
+            method: "PUT", // o PATCH, depende de tu backend
             headers: {
                 "Content-Type": "application/json",
+                // Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(perfilActualizado),
+            body: JSON.stringify(datosActualizados),
         });
 
         if (!response.ok) {
-            throw new Error("Error al editar el perfil");
+            throw new Error("Error al actualizar el perfil");
         }
 
         return await response.json();
@@ -20,6 +21,7 @@ export const editarPerfil = async (perfilActualizado) => {
         throw error;
     }
 };
+
 
 
 
