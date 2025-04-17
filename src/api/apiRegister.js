@@ -1,51 +1,29 @@
-// src/api/apiRegister.js
+const API_URL = "https://tu-api.com/api/register"; // 
 
-/**
- * Función para registrar un nuevo usuario en el sistema
- * @param {Object} userData - Los datos del usuario: { username, email, password }
- * @returns {Promise<Object>} - Datos del usuario registrado
- */
-export const registerUser = async ({ username, email, password }) => {
-    // 👉 Simulación temporal para pruebas
-    console.log("Simulación de registro con:", { username, email, password });
-
-    // Puedes simular un retraso si quieres que parezca real:
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Simulación de respuesta exitosa
-    return {
-        usuario: {
-            id: "123456",
-            username,
-            email,
-            name: "Nombre de prueba"
-        },
-        token: "token-ficticio-123"
-    };
-
-    // 🛠️ Cuando conectes al backend, usa este bloque:
-
-    /*
+export async function registerUser({ name, email, password /*, username */ }) {
     try {
-        const response = await fetch("https://tudominio.com/api/register", {
+        const response = await fetch(API_URL, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+                // username // 👉 Descomenta si el frontend genera el username
+            })
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.mensaje || "Error al registrar el usuario");
+            throw new Error(data.message || "Error al registrar usuario.");
         }
 
-        return data;
-
+        return data; // Esperamos que contenga { usuario: { ... } }
     } catch (error) {
-        console.error("Error en el registro:", error);
+        console.error("Error en apiRegister:", error);
         throw error;
     }
-    */
-};
+}

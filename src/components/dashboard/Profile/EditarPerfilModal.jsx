@@ -64,6 +64,8 @@ const EditarPerfilModal = ({ isOpen, onClose, user, onSave }) => {
         onSave({ ...user, bio, link, avatar });
     };
 
+    
+
     return (
         <div className="modal-overlay">
             <div className="modal-editar-content" ref={modalRef}>

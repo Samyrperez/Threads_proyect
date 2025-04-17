@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/apiLogin";
 import "../css/styles.css"; // Importa el archivo CSS
 
 const Login = () => {
@@ -18,59 +19,42 @@ const Login = () => {
             return () => clearTimeout(timer);
         }, []);
 
-        const usuarioSimulado = {
-            email: "samyr.perezpabon@gmail.com",
-            password: "samperez0819",
-            username: "samperez",
-            name: "Samyr Perez"
-        };
+        // const usuarioSimulado = {
+        //     email: "samyr.perezpabon@gmail.com",
+        //     password: "samperez0819",
+        //     username: "samperez",
+        //     name: "Samyr Perez"
+        // };
         
     async function handleLogin(e) {
         e.preventDefault();
         setError("");
 
-        // Simulación de login con datos locales
-        if (
-            (input === usuarioSimulado.email || input === usuarioSimulado.username) &&
-            password === usuarioSimulado.password
-        ) {
-            console.log("Login exitoso");
+        try {
+            // Aceptamos tanto email como username en el input
+            const isEmail = input.includes("@");
+            const credentials = isEmail
+                ? { email: input, password }
+                : { username: input, password };
 
-            // Guardamos al usuario simulado en localStorage
-            localStorage.setItem("usuario", JSON.stringify(usuarioSimulado));
+            const data = await loginUser(credentials); // Llama al backend
 
-             // Limpiar formulario
+            // Guarda el usuario y token
+            localStorage.setItem("usuario", JSON.stringify(data.usuario));
+            localStorage.setItem("token", data.token);
+
+            // Limpia el formulario
             setInput("");
             setPassword("");
 
-            // Redirigimos al home
+            // Redirige
             navigate("/dashboard");
-
-        } else {
-            setError("Credenciales incorrectas. Intenta nuevamente.");
+        } catch (error) {
+            console.error("Error en el login:", error);
+            setError(error.message || "Error al iniciar sesión");
         }
-
-        
-        // try {
-        //   const response = await fetch("http://localhost:3000/api/login", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({ email: input, password }),
-        //   });
-        //
-        //   const data = await response.json();
-        //
-        //   if (response.ok) {
-        //     localStorage.setItem("usuario", JSON.stringify(data.usuario));
-        //     navigate("/home");
-        //   } else {
-        //     setError(data.mensaje);
-        //   }
-        // } catch (error) {
-        //   console.error("Error en el login:", error);
-        //   setError("Ocurrió un error al intentar iniciar sesión.");
-        // }
     }
+
 
     
     return (
@@ -127,7 +111,7 @@ const Login = () => {
                                 className="logo-instagram"
                             />
                             <p>Ir a Instagram  </p>
-                            <img src="./src/image/MayorQue_menor.png" alt="Ir" />
+                            <img src="./src/image/MayorQue_menor.png" alt="Ir" className="ir-instagram"/>
                         </button>
                     </a>
                     

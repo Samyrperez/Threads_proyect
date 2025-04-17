@@ -69,6 +69,8 @@ const Profile = () => {
                 onClose={cerrarModal}
                 user={fakeUser}
                 onSave={guardarCambios}
+                // user={usuario}
+                // onSave={handleGuardarCambios}
             />
 
             

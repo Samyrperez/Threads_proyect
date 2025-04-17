@@ -25,14 +25,14 @@ const Register = () => {
         setError("");
 
         // Validación rápida
-        if (!username || !email || !password) {
+        if (!name || !email || !password) {
             setError("Todos los campos son obligatorios.");
             return;
         }
 
         try {
             // Llamada a la API (simulada o real)
-            const data = await registerUser({ username, email, password });
+            const data = await registerUser({ name, email, password });
 
             // Guardar el usuario (simulado o del backend)
             localStorage.setItem("usuario", JSON.stringify(data.usuario));
@@ -69,8 +69,8 @@ const Register = () => {
                         <input
                             type="text"
                             placeholder="Nombre completo"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="input-field"
                             required
                         />
