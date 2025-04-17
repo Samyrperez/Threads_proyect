@@ -30,3 +30,6 @@ export const crearPublicacion = async (publicacion) => {
 // Esta función se encarga de enviar los datos de una nueva publicación (post o hilo) al backend (API).
 // Recibe un objeto `datos` con el contenido del post, como texto, imagen, etc.
 // Utiliza fetch para hacer una solicitud POST simulando que tenemos una API REST.
+
+
+

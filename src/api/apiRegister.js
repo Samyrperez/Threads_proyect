@@ -1,4 +1,4 @@
-const API_URL = "https://tu-api.com/api/register"; // 
+const API_URL = "https://dockerapps.pulzo.com/threads/register"; // 
 
 export async function registerUser({ name, email, password /*, username */ }) {
     try {

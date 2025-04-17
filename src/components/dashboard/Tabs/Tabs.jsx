@@ -5,19 +5,17 @@ import TabHilos from "./TabHilos";
 import TabReposts from "./TabReposts";
 import TabRespuestas from "./TabRespuestas";
 
-
-
 const Tabs = () => {
     const [activeTab, setActiveTab] = useState("hilos");
 
     const renderContent = () => {
         switch (activeTab) {
             case "hilos":
-        return <TabHilos />;
-        case "respuestas":
-            return <TabRespuestas />;
-        case "reposts":
-        return <TabReposts />;
+                return <TabHilos />;
+            case "respuestas":
+                return <TabRespuestas />;
+            case "reposts":
+                return <TabReposts />;
             default:
                 return null;
         }
@@ -29,7 +27,6 @@ const Tabs = () => {
 
     return (
         <div className="tabs-container">
-
             <div className="tab-buttons">
                 <div
                     className={`tab ${activeTab === "hilos" ? "active" : ""}`}
@@ -50,10 +47,8 @@ const Tabs = () => {
                     Reposts
                 </div>
             </div>
-            
-            <div className="tab-content">
-                {renderContent()}
-            </div>
+
+            <div className="tab-content">{renderContent()}</div>
         </div>
     );
 };

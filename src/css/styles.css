@@ -3,7 +3,9 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    height: 100vh;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* evita scroll doble */
     display: flex;
     justify-content: center;
     align-items: center;

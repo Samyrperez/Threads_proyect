@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// import { seguirUsuario } from "../../../api/usuarios/seguirUsuario"; // Ajusta el path según tu estructura
+ // import { dejarDeSeguirUsuario } from "../../../api/usuarios/dejarDeSeguirUsuario";
 import "./ModalPerfilUsuario.css";
 
 const ModalPerfilUsuario = ({ usuario, onClose }) => {
@@ -10,6 +12,23 @@ const ModalPerfilUsuario = ({ usuario, onClose }) => {
         setSiguiendo(!siguiendo);
         // Aquí podrías agregar la lógica para llamar a tu API en el futuro
     };
+
+    //     // Con backend
+    // import { dejarDeSeguirUsuario } from "../../../api/usuarios/dejarDeSeguirUsuario";
+
+    // const manejarClickSeguir = async () => {
+    //     try {
+    //         if (siguiendo) {
+    //             await dejarDeSeguirUsuario(usuario.id);
+    //         } else {
+    //             await seguirUsuario(usuario.id);
+    //         }
+    //         setSiguiendo(!siguiendo);
+    //     } catch (error) {
+    //         alert("Hubo un error al actualizar el estado de seguimiento");
+    //     }
+    // };
+
 
     return (
         <div className="modal-overlay" onClick={onClose}>
