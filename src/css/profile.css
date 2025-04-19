@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     width: 80% !important;
+    height: 100vh; /* ajusta según el header */
     /* min-height: auto; */
     margin: 80px 35px 0px 35px;
     /* margin-top: 180px; */
@@ -20,8 +21,6 @@
     background-color: #171717;
     overflow: hidden;
     flex: 1;
-    overflow-y: auto;
-    height: calc(100vh - 180px); /* ajusta según el header */
     overflow-y: auto;
     
 }
@@ -121,8 +120,8 @@
 
 @media screen and (max-width: 768px){
     .profile-container {
-        width: 90%;
-        margin-top: 35px;
+        width: 100%;
+        margin-top: 130px;
     }
         
 }

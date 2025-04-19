@@ -2,9 +2,8 @@
     display: flex;
     flex-direction: column;
     width: 80% !important;
-    /* min-height: auto; */
-    margin: 80px 35px 0px 35px;
-    /* margin-top: 180px; */
+    height: 100vh; 
+    margin: auto 35px 0px 35px;
     color: white;
     border-radius: 16px;
     padding: 20px;
@@ -13,8 +12,7 @@
     overflow: hidden;
     flex: 1;
     overflow-y: auto;
-    height: calc(100vh - 180px); /* ajusta según el header */
-    overflow-y: auto;
+    
 }
 .home-container::-webkit-scrollbar {
     width: 8px;
@@ -52,7 +50,7 @@
 @media screen and (max-width: 768px){
     .home-container {
         width: 90%;
-        margin-top: 170px;
+        margin-top: 230px;
     }
         
 }

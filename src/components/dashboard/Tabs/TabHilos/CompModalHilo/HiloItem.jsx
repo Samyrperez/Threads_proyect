@@ -5,7 +5,11 @@ import LocationIcon from "../../../../icons/LocationIcon";
 
 const HiloItem = ({ index, hilo, avatar, actualizarHilo, eliminarUltimoHilo }) => {
     const manejarImagen = (file) => {
-        actualizarHilo(index, "imagen", URL.createObjectURL(file));
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            actualizarHilo(index, "imagen", reader.result); // ✅ base64
+        };
+        reader.readAsDataURL(file);
     };
 
     const obtenerUbicacion = () => {
@@ -24,7 +28,6 @@ const HiloItem = ({ index, hilo, avatar, actualizarHilo, eliminarUltimoHilo }) =
             alert("Tu navegador no soporta geolocalización");
         }
     };
-    
 
     return (
         <div className="modal-body">

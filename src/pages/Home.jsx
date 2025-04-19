@@ -1,92 +1,94 @@
 // src/components/pages/Home.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Publicar from "../components/dashboard/Tabs/TabHilos/Publicar";
-
-
 import Publicacion from "../components/dashboard/Home/Publicacion";
 import "../css/Home.css";
+import { obtenerComentarios } from "../../src/api/publicaciones/obtenerComentarios"; // ruta ajustada
 
-const publicaciones = [
-    {
-        id: 1,
-        usuario: {
-            nombre: "tattsuya",
-            avatar: "https://i.pravatar.cc/150?img=1"
-        },
-        tiempo: "12 h",
-        texto: "¡Qué tremendo episodio el de hoy! 😤🔥",
-        imagen: "https://i.imgur.com/VpD7Kpq.jpeg",
-        likes: 687,
-        respuestas: 7,
-        compartidos: 28,
-        guardados: 48
-    },
-    {
-        id: 2,
-        usuario: {
-            nombre: "aiko_23",
-            avatar: "https://i.pravatar.cc/150?img=2"
-        },
-        tiempo: "3 h",
-        texto: "Estoy amando esta nueva app 🖤",
-        imagen: null,
-        likes: 102,
-        respuestas: 5,
-        compartidos: 12,
-        guardados: 33
-    },
-    {
-        id: 3,
-        usuario: {
-            nombre: "nobaraa",
-            avatar: "https://i.pravatar.cc/150?img=3"
-        },
-        tiempo: "1 h",
-        texto: "Recuerden hidratarse y descansar. ¡Feliz domingo!",
-        imagen: null,
-        likes: 88,
-        respuestas: 2,
-        compartidos: 5,
-        guardados: 11
-    }
-];
+const Home = () => {
+    const [comentarios, setComentarios] = useState([]);
+    const [cargando, setCargando] = useState(true);
+    const [avatar, setAvatar] = useState("/default-avatar.png");
 
+    useEffect(() => {
+        const cargarDatos = async () => {
+            try {
+                // 🔁 Cargar comentarios
+                const resultado = await obtenerComentarios();
+                console.log("📨 Comentarios recibidos en Home:", resultado);
 
+                if (resultado && Array.isArray(resultado.data)) {
+                    setComentarios(resultado.data);
+                } else {
+                    console.warn("⚠️ No se recibió un array en 'data':", resultado);
+                    setComentarios([]);
+                }
 
-const Home = ({ user }) => {
-    const fakeUser = {
-        name: user?.name || "Invitado",
-        username: user?.username || "guest",
-        email: user?.email || "guest@example.com",
-        avatar:
-            user?.avatar ||
-            "https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg",
-        bio: "Ingeniero ambiental y sanitario\n💍 @lola_rodriguezz\nS&Y ❤️\n🫍‍♂️🎵🎸",
-        followers: 78,
-        badges: ["📷", "🔗"]
-    };
+                // 👤 Cargar avatar del usuario logueado (para Publicar)
+                const userId = localStorage.getItem("userId");
+                const token = localStorage.getItem("token");
+
+                const res = await fetch(`https://dockerapps.pulzo.com/threads/api/usuarios/${userId}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (res.ok) {
+                    const perfil = await res.json();
+                    if (perfil.data.avatar) {
+                        setAvatar(`https://dockerapps.pulzo.com/threads${perfil.data.avatar}`);
+                    }
+                }
+            } catch (err) {
+                console.error("❌ Error cargando datos:", err);
+            } finally {
+                setCargando(false);
+            }
+        };
+
+        cargarDatos();
+    }, []);
 
     return (
-
         <div className="home-container">
-            <Publicar avatar={fakeUser.avatar} />
+            <Publicar avatar={avatar} />
 
             <div className="home-content">
-
                 <div className="scroll-publicaciones">
-                    {publicaciones.map((pub) => (
-                        <Publicacion
-                            key={pub.id}
-                            usuario={pub.usuario}
-                            tiempo={pub.tiempo}
-                            texto={pub.texto}
-                            imagen={pub.imagen}
-                            likes={pub.likes}
-                            respuestas={pub.respuestas}
-                            compartidos={pub.compartidos}
-                            guardados={pub.guardados}
-                        />
-                    ))}
+                    {cargando ? (
+                        <p className="loading">Cargando publicaciones...</p>
+                    ) : comentarios.length === 0 ? (
+                        <p className="no-posts">No hay publicaciones aún.</p>
+                    ) : (
+                        comentarios.map(({ comentario }, index) => {
+                            if (!comentario || !comentario.usuario) return null;
+
+                            return (
+                                <Publicacion
+                                    key={comentario.id || index}
+                                    id={comentario.id} // 👈 Agregado para que el componente tenga el ID
+                                    usuario={{
+                                        name: comentario.usuario.name || "Usuario",
+                                        username: comentario.usuario.username || "@desconocido",
+                                        avatar: comentario.usuario.avatar
+                                            ? `https://dockerapps.pulzo.com/threads${comentario.usuario.avatar}`
+                                            : "/default-avatar.png"
+                                    }}
+                                    tiempo={new Date(comentario.fecha_creacion).toLocaleString()}
+                                    texto={comentario.contenido || ""}
+                                    imagen={null}
+                                    likes={comentario.me_gusta_total || 0}
+                                    respuestas={0}
+                                    compartidos={0}
+                                    guardados={0}
+                                    comentarios={comentario.comentarios || []}
+                                />
+                            );
+                            
+                        })
+                    )}
                 </div>
             </div>
         </div>

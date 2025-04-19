@@ -7,13 +7,15 @@ import FavoriteIcon from "./FavoriteIcon";
 import ProfileIcon from "../icons/ProfileIcon";
 import MenuIcon from "../icons/MenuIcon";
 import DropdownMenu from "./DropdownMenu";
+import { logoutUser } from "../../api/auth/logout";
+
 
 
 const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef, toggleRef, onAddClick }) => {
     const navigate = useNavigate();
 
     const cerrarSesion = () => {
-        localStorage.removeItem("usuario");
+        logoutUser(); 
         navigate("/login");
     };
     

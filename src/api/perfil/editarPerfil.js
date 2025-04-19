@@ -1,21 +1,27 @@
-const API_URL = "http://localhost:3000/api"; // Cambia según tu entorno
-
 export const editarPerfil = async (datosActualizados) => {
     try {
-        const response = await fetch(`${API_URL}/perfil`, {
-            method: "PUT", // o PATCH, depende de tu backend
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            throw new Error("Token no encontrado. Por favor, iniciá sesión.");
+        }
+
+        const response = await fetch("https://dockerapps.pulzo.com/threads/api/usuarios/perfil", {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(datosActualizados),
         });
 
         if (!response.ok) {
-            throw new Error("Error al actualizar el perfil");
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Error al actualizar el perfil");
         }
 
-        return await response.json();
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error("Error en editarPerfil:", error);
         throw error;
@@ -23,16 +29,3 @@ export const editarPerfil = async (datosActualizados) => {
 };
 
 
-
-
-// import { editarPerfil } from "@/api/perfil";
-
-// const handleGuardarCambios = async (datosActualizados) => {
-//     try {
-//         const usuarioEditado = await editarPerfil(datosActualizados);
-//         console.log("✅ Perfil actualizado:", usuarioEditado);
-//         // Aquí puedes actualizar el estado global o local
-//     } catch (error) {
-//         console.error("❌ Error al guardar los cambios:", error);
-//     }
-// };

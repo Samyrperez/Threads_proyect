@@ -1,6 +1,6 @@
 const API_URL = "https://dockerapps.pulzo.com/threads/register"; // 
 
-export async function registerUser({ name, email, password /*, username */ }) {
+export async function registerUser({ name, email, password }) {
     try {
         const response = await fetch(API_URL, {
             method: "POST",
@@ -11,7 +11,7 @@ export async function registerUser({ name, email, password /*, username */ }) {
                 name,
                 email,
                 password,
-                // username // 👉 Descomenta si el frontend genera el username
+                
             })
         });
 
@@ -20,6 +20,7 @@ export async function registerUser({ name, email, password /*, username */ }) {
         if (!response.ok) {
             throw new Error(data.message || "Error al registrar usuario.");
         }
+        console.log(data.message)
 
         return data; // Esperamos que contenga { usuario: { ... } }
     } catch (error) {

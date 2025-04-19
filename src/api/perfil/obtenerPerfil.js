@@ -1,20 +1,28 @@
-const API_URL = "http://localhost:3000/api"; // Cambia si usas otro dominio o puerto
-
-export const obtenerPerfil = async () => {
+export const obtenerPerfil = async (id) => {
     try {
-        const response = await fetch(`${API_URL}/perfil`, {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            throw new Error("Token no encontrado. Por favor, iniciá sesión.");
+        }
+
+        const response = await fetch(`https://dockerapps.pulzo.com/threads/api/usuarios/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${token}`, // Si usas autenticación
+                Authorization: `Bearer ${token}`,
             },
         });
 
         if (!response.ok) {
-            throw new Error("Error al obtener el perfil del usuario");
+            const errorData = await response.json();
+            throw new Error(errorData.error || "No se pudo obtener el perfil");
         }
+        
+        
 
-        return await response.json();
+        const data = await response.json();
+        return data.data;
     } catch (error) {
         console.error("Error en obtenerPerfil:", error);
         throw error;

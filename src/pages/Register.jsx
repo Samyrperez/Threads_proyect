@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../css/styles.css";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../api/apiRegister"; // 👉 Importamos la función de API
+import { registerUser } from "../api/auth/apiRegister"; // 👉 Importamos la función de API
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -34,8 +34,12 @@ const Register = () => {
             // Llamada a la API (simulada o real)
             const data = await registerUser({ name, email, password });
 
-            // Guardar el usuario (simulado o del backend)
-            localStorage.setItem("usuario", JSON.stringify(data.usuario));
+            console.log("Respuesta de la API:", data);
+
+            if (data.user) {
+                localStorage.setItem("usuario", JSON.stringify(data.user));
+                localStorage.setItem("token", data.user.token);
+            }
 
             // Redirige al dashboard o login
             navigate("/login");

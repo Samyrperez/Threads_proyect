@@ -102,6 +102,12 @@
     object-fit: cover;
     
 }
+.contenido {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 0.5rem;
+}
 
 .post-footer {
     display: flex;

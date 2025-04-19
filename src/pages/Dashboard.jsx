@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef  } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { logoutUser } from "../api/auth/logout";
 import "../css/styles_dashboard.css";
-import ThreadsLogo from "../components/dashboard/ThreadsLogo";
+// import ThreadsLogo from "../components/dashboard/ThreadsLogo";
 import MenuIcon from "../components/icons/MenuIcon";
 import Sidebar from "../components/dashboard/Sidebar";
 import LogoSplash from "../components/dashboard/LogoSplash";
@@ -11,6 +11,7 @@ import MainContainer from "../components/dashboard/MainConatiner";
 import AddIcon from "../components/icons/AddIcon";
 import ModalHilo from "../components/dashboard/Tabs/TabHilos/ModalHilo";
 import "../components/dashboard/Tabs/TabHilos/ModalHilo.css";
+
 
 
 
@@ -29,25 +30,18 @@ const Dashboard = () => {
     const toggleMobileRef = useRef(null);
 
 
-    const abrirModal = () => setMostrarModal(true);
-    const cerrarModal = () => setMostrarModal(false);
+    const abrirModal = () => 
+        setMostrarModal(true);
+    const cerrarModal = () => 
+        setMostrarModal(false);
     const navigate = useNavigate();
 
     const cerrarSesion = () => {
-        localStorage.removeItem("usuario");
+        logoutUser();
         navigate("/login");
     };
     
     useEffect(() => {
-        // Simulación de usuario autenticado (esto debería ser reemplazado por la lógica real de autenticación)
-        // Aquí puedes obtener el usuario de un servicio o contexto global
-        // Por ejemplo, usando localStorage o un contexto de React
-        
-        setUser({
-            username: "SamCode",
-            email: "sam@example.com",
-            avatar: "https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg",
-        });
         const timer = setTimeout(() => {
             setShowLogo(false); // Oculta el logo después de 2 segundos
         }, 2000);

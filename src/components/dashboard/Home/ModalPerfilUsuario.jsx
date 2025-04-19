@@ -13,21 +13,6 @@ const ModalPerfilUsuario = ({ usuario, onClose }) => {
         // Aquí podrías agregar la lógica para llamar a tu API en el futuro
     };
 
-    //     // Con backend
-    // import { dejarDeSeguirUsuario } from "../../../api/usuarios/dejarDeSeguirUsuario";
-
-    // const manejarClickSeguir = async () => {
-    //     try {
-    //         if (siguiendo) {
-    //             await dejarDeSeguirUsuario(usuario.id);
-    //         } else {
-    //             await seguirUsuario(usuario.id);
-    //         }
-    //         setSiguiendo(!siguiendo);
-    //     } catch (error) {
-    //         alert("Hubo un error al actualizar el estado de seguimiento");
-    //     }
-    // };
 
 
     return (

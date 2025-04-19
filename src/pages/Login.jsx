@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../api/apiLogin";
+import { loginUser } from "../api/auth/apiLogin"; // Importa la función de login
 import "../css/styles.css"; // Importa el archivo CSS
 
 const Login = () => {
@@ -19,12 +19,6 @@ const Login = () => {
             return () => clearTimeout(timer);
         }, []);
 
-        // const usuarioSimulado = {
-        //     email: "samyr.perezpabon@gmail.com",
-        //     password: "samperez0819",
-        //     username: "samperez",
-        //     name: "Samyr Perez"
-        // };
         
     async function handleLogin(e) {
         e.preventDefault();
@@ -32,16 +26,21 @@ const Login = () => {
 
         try {
             // Aceptamos tanto email como username en el input
-            const isEmail = input.includes("@");
-            const credentials = isEmail
-                ? { email: input, password }
-                : { username: input, password };
+            
+            const credentials = {
+                username: input,
+                password: password,
+            }
 
             const data = await loginUser(credentials); // Llama al backend
 
+            console.log("Respuesta del login:",data)
+
             // Guarda el usuario y token
-            localStorage.setItem("usuario", JSON.stringify(data.usuario));
-            localStorage.setItem("token", data.token);
+            localStorage.setItem("usuario", JSON.stringify(data.user));
+            localStorage.setItem("token", data.user.token);
+            localStorage.setItem("userId", data.user.id);
+
 
             // Limpia el formulario
             setInput("");
