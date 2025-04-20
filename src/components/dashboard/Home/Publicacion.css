@@ -8,7 +8,7 @@
     margin-bottom: 5px;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
     transition: transform 0.2s ease;
-    
+
     /* border-radius: 15px; */
     /* border-top: #333 !important; */
     border-bottom: 1px solid #333;
@@ -23,6 +23,7 @@
     align-items: flex-start;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
 .post-avatar .avatar {
     width: 40px;
     height: 40px;
@@ -39,12 +40,14 @@
     margin: 0;
     padding: 0;
 }
+
 .post-header p {
     color: #fff;
     size: bold;
     font-size: 10px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
 .post-header span {
     color: #fff;
     size: bold;
@@ -58,6 +61,7 @@
     /* border-radius: 50%; */
     /* margin-right: 10px; */
 }
+
 .post-avatar {
     display: flex;
     flex-direction: column-reverse;
@@ -87,6 +91,7 @@
     line-height: 1;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
 .post-body {
     width: 100%;
     flex: 1;
@@ -100,8 +105,9 @@
     margin-top: 5px;
     max-height: 400px;
     object-fit: cover;
-    
+
 }
+
 .contenido {
     max-width: 100%;
     height: auto;
@@ -130,4 +136,44 @@
 
 .post-footer span:hover {
     color: #fff;
+}
+
+.comentario-menu-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.comentario-menu-boton {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.comentario-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 150px;
+}
+
+.comentario-opcion-eliminar {
+    background: none;
+    border: none;
+    color: red;
+    padding: 8px 12px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.comentario-opcion-eliminar:hover {
+    background-color: #f5f5f5;
 }

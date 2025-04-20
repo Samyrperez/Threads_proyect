@@ -5,14 +5,13 @@ import CommentIcon from "../../icons/CommentIcon";
 import RepostIcon from "../../icons/RepostIcon";
 import SaveIcon from "../../icons/SaveIcon";
 import ModalPerfilUsuario from "../Home/ModalPerfilUsuario";
-import { darLikeComentario } from "../../../api/publicaciones/darLikeComentario"; // ajusta según tu estructura
+import { darLikeComentario } from "../../../api/publicaciones/darLikeComentario";
 import { obtenerLikesComentario } from "../../../api/publicaciones/obtenerLikesComentario";
 import { eliminarLikeComentario } from "../../../api/publicaciones/eliminarLikeComentario";
-
-
+import { eliminarComentario } from "../../../api/publicaciones/eliminarComentario";
 
 const Publicacion = ({
-    id, 
+    id,
     usuario,
     tiempo,
     texto,
@@ -21,32 +20,29 @@ const Publicacion = ({
     respuestas,
     compartidos,
     guardados,
-    comentarios  = [],
+    comentarios = [],
 }) => {
     const [liked, setLiked] = useState(false);
     const [modalAbierto, setModalAbierto] = useState(false);
-    const [likeCount, setLikeCount] = useState(likes); // contador local
+    const [likeCount, setLikeCount] = useState(likes);
     const [comentariosConLike, setComentariosConLike] = useState([]);
+    const [mostrarMenu, setMostrarMenu] = useState(null);
 
     const userId = parseInt(localStorage.getItem("userId"));
-    
-    
 
     const handleLikeComentario = async (comentarioId) => {
         try {
             const comentarioActual = comentariosConLike.find(c => c.id === comentarioId);
-    
-            // Si es un comentario
             if (comentarioActual) {
                 if (!comentarioActual?.me_gusta_usuario) {
                     await darLikeComentario(comentarioId, userId);
                 } else {
                     await eliminarLikeComentario(comentarioId, userId);
                 }
-    
+
                 const usuariosQueDieronLike = await obtenerLikesComentario(comentarioId);
                 const yaDioLike = usuariosQueDieronLike.some(u => u.id === userId);
-    
+
                 setComentariosConLike(prev =>
                     prev.map(c =>
                         c.id === comentarioId
@@ -61,7 +57,6 @@ const Publicacion = ({
                     )
                 );
             } else {
-                // 👇 Si es la publicación principal
                 if (!liked) {
                     const res = await darLikeComentario(comentarioId, userId);
                     if (res?.code === 200) {
@@ -76,13 +71,22 @@ const Publicacion = ({
                     }
                 }
             }
-    
         } catch (error) {
             console.error("Error manejando el like:", error);
         }
     };
-    
-    
+
+    const handleEliminar = async (comentarioId) => {
+        const confirmado = window.confirm("¿Seguro que quieres eliminar este comentario?");
+        if (confirmado) {
+            const res = await eliminarComentario(userId, comentarioId);
+            if (res?.code === 200) {
+                setComentariosConLike(prev => prev.filter(c => c.id !== comentarioId));
+                setMostrarMenu(null);
+            }
+        }
+    };
+
     useEffect(() => {
         const verificarLikePublicacion = async () => {
             try {
@@ -93,10 +97,9 @@ const Publicacion = ({
                 console.error("❌ Error verificando like en la publicación:", error);
             }
         };
-    
+
         verificarLikePublicacion();
     }, [id, userId]);
-    
 
     useEffect(() => {
         const cargarLikes = async () => {
@@ -112,10 +115,9 @@ const Publicacion = ({
             );
             setComentariosConLike(nuevosComentarios);
         };
-    
+
         cargarLikes();
     }, [comentarios, userId]);
-    
 
     const decodeHTML = (html) => {
         const txt = document.createElement("textarea");
@@ -126,8 +128,6 @@ const Publicacion = ({
     const avatarUrl = usuario.avatar?.startsWith("/uploads")
         ? `https://dockerapps.pulzo.com/threads${usuario.avatar}`
         : usuario.avatar || "/default-avatar.png";
-
-    console.log("Texto que llega a Publicacion:", texto);
 
     return (
         <div className="post">
@@ -141,17 +141,40 @@ const Publicacion = ({
                 </div>
 
                 <div className="post-body">
-                    <div className="post-header">
+                    <div className="post-header" >
                         <div className="user-info">
                             <span className="username">{usuario.username}</span>
                             <span className="time">{tiempo}</span>
                         </div>
 
-                        <div
-                            className="post-texto"
-                            dangerouslySetInnerHTML={{ __html: decodeHTML(texto) }}
-                        />
+                        {usuario.id === userId && (
+                            <div className="menu-container">
+                                <button
+                                    className="menu-button"
+                                    onClick={() =>
+                                        setMostrarMenu((prev) =>
+                                            prev === id ? null : id
+                                        )
+                                    }
+                                >
+                                    ⋯
+                                </button>
+
+                                {mostrarMenu === id && (
+                                    <div className="dropdown-menu">
+                                        <button onClick={() => handleEliminar(id)}>
+                                            Eliminar publicación
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
+
+                    <div
+                        className="post-texto"
+                        dangerouslySetInnerHTML={{ __html: decodeHTML(texto) }}
+                    />
 
                     {imagen && (
                         <div className="post-media">
@@ -160,7 +183,7 @@ const Publicacion = ({
                     )}
 
                     <div className="post-footer">
-                            <span onClick={() => handleLikeComentario(id)} style={{ cursor: "pointer" }}>
+                        <span onClick={() => handleLikeComentario(id)} >
                             <HeartIcon filled={liked} color={liked ? "red" : "currentColor"} />
                             <span>{likeCount}</span>
                         </span>
@@ -194,41 +217,52 @@ const Publicacion = ({
                                                 <strong>{comentario.usuario.name}</strong>{" "}
                                                 <span className="username">{comentario.usuario.username}</span>
                                             </div>
+
+                                            {comentario.usuario.id === userId && (
+                                                <div className="comentario-menu-wrapper">
+                                                    <button
+                                                        className="comentario-menu-boton"
+                                                        onClick={() =>
+                                                            setMostrarMenu((prev) =>
+                                                                prev === comentario.id ? null : comentario.id
+                                                            )
+                                                        }
+                                                    >
+                                                        ⋯
+                                                    </button>
+
+                                                    {mostrarMenu === comentario.id && (
+                                                        <div className="comentario-dropdown-menu">
+                                                            <button
+                                                                className="comentario-opcion-eliminar"
+                                                                onClick={() => handleEliminar(comentario.id)}
+                                                            >
+                                                                Eliminar comentario
+                                                            </button>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="contenido">
-                                            {/* Mostrar imagen base64 si está presente */}
                                             {comentario.contenido?.includes("data:image/") && (
                                                 <img
                                                     src={comentario.contenido.match(/src="([^"]+)"/)?.[1]}
                                                     alt="contenido"
-                                                    style={{ maxWidth: "100%", borderRadius: "8px", marginTop: "8px" }}
                                                 />
                                             )}
 
-                                            {/* Botón de like para el comentario */}
                                             <div
                                                 className="like-comentario"
-                                                onClick={() => {
-                                                    if (!comentario.me_gusta_usuario) {
-                                                        handleLikeComentario(comentario.id);
-                                                    } else {
-                                                        console.log("⚠️ Ya diste like a este comentario.");
-                                                    }
-                                                }}
-                                                style={{
-                                                    cursor: "pointer",
-                                                    marginTop: "8px",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    gap: "6px"
-                                                }}
+                                                onClick={() => handleLikeComentario(comentario.id)}
                                             >
-                                                <HeartIcon filled={comentario.me_gusta_usuario} color={comentario.me_gusta_usuario ? "red" : "currentColor"} />
+                                                <HeartIcon
+                                                    filled={comentario.me_gusta_usuario}
+                                                    color={comentario.me_gusta_usuario ? "red" : "currentColor"}
+                                                />
                                                 <span>{comentario.me_gusta_total || 0}</span>
                                             </div>
-
                                         </div>
-
                                     </div>
                                 );
                             })}
