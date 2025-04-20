@@ -4,11 +4,13 @@ import HeartIcon from "../../icons/HeartIcon";
 import CommentIcon from "../../icons/CommentIcon";
 import RepostIcon from "../../icons/RepostIcon";
 import SaveIcon from "../../icons/SaveIcon";
+import DeleteIcon from "../../icons/DeleteIcon";
 import ModalPerfilUsuario from "../Home/ModalPerfilUsuario";
 import { darLikeComentario } from "../../../api/publicaciones/darLikeComentario";
 import { obtenerLikesComentario } from "../../../api/publicaciones/obtenerLikesComentario";
 import { eliminarLikeComentario } from "../../../api/publicaciones/eliminarLikeComentario";
 import { eliminarComentario } from "../../../api/publicaciones/eliminarComentario";
+
 
 const Publicacion = ({
     id,
@@ -26,7 +28,7 @@ const Publicacion = ({
     const [modalAbierto, setModalAbierto] = useState(false);
     const [likeCount, setLikeCount] = useState(likes);
     const [comentariosConLike, setComentariosConLike] = useState([]);
-    const [mostrarMenu, setMostrarMenu] = useState(null);
+    
 
     const userId = parseInt(localStorage.getItem("userId"));
 
@@ -76,16 +78,28 @@ const Publicacion = ({
         }
     };
 
-    const handleEliminar = async (comentarioId) => {
-        const confirmado = window.confirm("¿Seguro que quieres eliminar este comentario?");
-        if (confirmado) {
+    const handleEliminarComentario = async (comentarioId) => {
+        console.log("🧪 Usuario logueado:", userId);
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este comentario?");
+        if (!confirmDelete) return;
+    
+        try {
+            console.log("🧪 Eliminando comentario:", { userId, comentarioId });
             const res = await eliminarComentario(userId, comentarioId);
             if (res?.code === 200) {
-                setComentariosConLike(prev => prev.filter(c => c.id !== comentarioId));
-                setMostrarMenu(null);
+                setComentariosConLike(prev =>
+                    prev.filter(c => c.id !== comentarioId)
+                );
+            } else {
+                console.error("❌ Error al eliminar el comentario:", res?.message);
             }
+        } catch (error) {
+            console.error("❌ Error en handleEliminarComentario:", error);
         }
     };
+    
+    
+    
 
     useEffect(() => {
         const verificarLikePublicacion = async () => {
@@ -141,34 +155,11 @@ const Publicacion = ({
                 </div>
 
                 <div className="post-body">
-                    <div className="post-header" >
+                    <div className="post-header">
                         <div className="user-info">
                             <span className="username">{usuario.username}</span>
                             <span className="time">{tiempo}</span>
                         </div>
-
-                        {usuario.id === userId && (
-                            <div className="menu-container">
-                                <button
-                                    className="menu-button"
-                                    onClick={() =>
-                                        setMostrarMenu((prev) =>
-                                            prev === id ? null : id
-                                        )
-                                    }
-                                >
-                                    ⋯
-                                </button>
-
-                                {mostrarMenu === id && (
-                                    <div className="dropdown-menu">
-                                        <button onClick={() => handleEliminar(id)}>
-                                            Eliminar publicación
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        )}
                     </div>
 
                     <div
@@ -200,6 +191,9 @@ const Publicacion = ({
                             <SaveIcon />
                             <span>{guardados}</span>
                         </span>
+                        <span onClick={handleEliminarComentario}>
+                            <DeleteIcon />
+                        </span>
                     </div>
 
                     {comentarios.length > 0 && (
@@ -208,6 +202,8 @@ const Publicacion = ({
                                 const avatarComentario = comentario.usuario.avatar?.startsWith("/uploads")
                                     ? `https://dockerapps.pulzo.com/threads${comentario.usuario.avatar}`
                                     : comentario.usuario.avatar || "/default-avatar.png";
+
+                                const imagenBase64 = comentario.contenido?.match(/src="([^"]+)"/);
 
                                 return (
                                     <div key={comentario.id} className="comentario">
@@ -219,37 +215,14 @@ const Publicacion = ({
                                             </div>
 
                                             {comentario.usuario.id === userId && (
-                                                <div className="comentario-menu-wrapper">
-                                                    <button
-                                                        className="comentario-menu-boton"
-                                                        onClick={() =>
-                                                            setMostrarMenu((prev) =>
-                                                                prev === comentario.id ? null : comentario.id
-                                                            )
-                                                        }
-                                                    >
-                                                        ⋯
-                                                    </button>
-
-                                                    {mostrarMenu === comentario.id && (
-                                                        <div className="comentario-dropdown-menu">
-                                                            <button
-                                                                className="comentario-opcion-eliminar"
-                                                                onClick={() => handleEliminar(comentario.id)}
-                                                            >
-                                                                Eliminar comentario
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div>
+                                                <DeleteIcon onClick={() => handleEliminarComentario(comentario.id)} />
                                             )}
                                         </div>
+
+
                                         <div className="contenido">
-                                            {comentario.contenido?.includes("data:image/") && (
-                                                <img
-                                                    src={comentario.contenido.match(/src="([^"]+)"/)?.[1]}
-                                                    alt="contenido"
-                                                />
+                                            {imagenBase64 && (
+                                                <img src={imagenBase64[1]} alt="contenido" />
                                             )}
 
                                             <div

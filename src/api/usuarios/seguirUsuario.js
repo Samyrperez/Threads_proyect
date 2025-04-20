@@ -1,47 +1,18 @@
-const API_URL = "http://localhost:3000/api"; // Ajusta según tu entorno
-
-export const seguirUsuario = async (idUsuarioActual, idUsuarioASeguir) => {
+// src/api/usuarios/seguirUsuario.js
+export const seguirUsuario = async (seguidor_id, seguido_id) => {
     try {
-        const response = await fetch(`${API_URL}/usuarios/${idUsuarioActual}/seguir`, {
+        const response = await fetch(`https://dockerapps.pulzo.com/threads/api/usuarios/seguir?=${seguido_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ seguirA: idUsuarioASeguir }),
+            body: JSON.stringify({ seguidor_id, seguido_id }),
         });
 
-        if (!response.ok) {
-            throw new Error("Error al seguir al usuario");
-        }
-
-        return await response.json();
+        const data = await response.json();
+        return data;
     } catch (error) {
-        console.error("❌ Error al intentar seguir al usuario:", error);
-        throw error;
+        console.error("Error al seguir al usuario:", error);
+        return { code: 500, message: "Error de red o del servidor" };
     }
 };
-
-
-// Con backend
-// const API_URL = "http://localhost:3000/api"; // Cambia según tu entorno
-// export const seguirUsuario = async (idUsuarioASeguir) => {
-//     try {
-//         const response = await fetch(`${API_URL}/usuarios/seguir`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 Authorization: `Bearer ${localStorage.getItem("token")}`, // o como guardes el token
-//             },
-//             body: JSON.stringify({ seguirA: idUsuarioASeguir }),
-//         });
-
-//         if (!response.ok) {
-//             throw new Error("No se pudo seguir al usuario");
-//         }
-
-//         return await response.json();
-//     } catch (error) {
-//         console.error("Error en seguirUsuario:", error);
-//         throw error;
-//     }
-// };
