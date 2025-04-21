@@ -77,9 +77,10 @@ const Publicacion = ({
             console.error("Error manejando el like:", error);
         }
     };
-
+    
     const handleEliminarComentario = async (comentarioId) => {
         console.log("🧪 Usuario logueado:", userId);
+        console.log("🧪 Comentario :", comentarioId);
         const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este comentario?");
         if (!confirmDelete) return;
     
@@ -88,7 +89,7 @@ const Publicacion = ({
             const res = await eliminarComentario(userId, comentarioId);
             if (res?.code === 200) {
                 setComentariosConLike(prev =>
-                    prev.filter(c => c.id !== comentarioId)
+                    prev.filter(c => c.comentario.id !== comentarioId)
                 );
             } else {
                 console.error("❌ Error al eliminar el comentario:", res?.message);
@@ -97,8 +98,6 @@ const Publicacion = ({
             console.error("❌ Error en handleEliminarComentario:", error);
         }
     };
-    
-    
     
 
     useEffect(() => {
@@ -157,7 +156,7 @@ const Publicacion = ({
                 <div className="post-body">
                     <div className="post-header">
                         <div className="user-info">
-                            <span className="username">{usuario.username}</span>
+                            <span className="username">{usuario.username} // Este es el id: {id}</span>
                             <span className="time">{tiempo}</span>
                         </div>
                     </div>
@@ -191,14 +190,16 @@ const Publicacion = ({
                             <SaveIcon />
                             <span>{guardados}</span>
                         </span>
-                        <span onClick={handleEliminarComentario}>
+                        <span onClick={() => handleEliminarComentario(id)}>
                             <DeleteIcon />
                         </span>
                     </div>
 
-                    {comentarios.length > 0 && (
+                    {/* {comentarios.length > 0 && (
+                        
                         <div className="comentarios">
                             {comentariosConLike.map((comentario) => {
+                                
                                 const avatarComentario = comentario.usuario.avatar?.startsWith("/uploads")
                                     ? `https://dockerapps.pulzo.com/threads${comentario.usuario.avatar}`
                                     : comentario.usuario.avatar || "/default-avatar.png";
@@ -211,7 +212,7 @@ const Publicacion = ({
                                             <img src={avatarComentario} alt="avatar" className="avatar" />
                                             <div>
                                                 <strong>{comentario.usuario.name}</strong>{" "}
-                                                <span className="username">{comentario.usuario.username}</span>
+                                                <span className="username">{comentario.usuario.username}{comentario.id} </span>
                                             </div>
 
                                             {comentario.usuario.id === userId && (
@@ -240,13 +241,14 @@ const Publicacion = ({
                                 );
                             })}
                         </div>
-                    )}
+            
+                    )} */}
                 </div>
             </div>
 
             {modalAbierto && (
                 <ModalPerfilUsuario
-                    usuario={usuario}
+                    usuarioASeguir={usuario}
                     onClose={() => setModalAbierto(false)}
                 />
             )}

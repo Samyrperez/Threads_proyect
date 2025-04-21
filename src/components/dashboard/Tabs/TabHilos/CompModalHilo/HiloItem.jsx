@@ -4,13 +4,45 @@ import ImageIcon from "../../../../icons/ImageIcon";
 import LocationIcon from "../../../../icons/LocationIcon";
 
 const HiloItem = ({ index, hilo, avatar, actualizarHilo, eliminarUltimoHilo }) => {
-    const manejarImagen = (file) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            actualizarHilo(index, "imagen", reader.result); // ✅ base64
-        };
-        reader.readAsDataURL(file);
+    // const manejarImagen = (file) => {
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //         actualizarHilo(index, "imagen", reader.result); // ✅ base64
+    //     };
+    //     reader.readAsDataURL(file);
+    // };
+
+    const manejarImagen = async (file) => {
+        const formData = new FormData();
+        formData.append("avatar", file); // 👈 nombre esperado por el backend
+    
+        try {
+            const token = localStorage.getItem("token"); // Asegúrate de que guardas el token así
+            const response = await fetch("https://dockerapps.pulzo.com/threads/api/usuarios/avatar", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                    // ❌ No pongas Content-Type aquí, fetch lo hace automáticamente con FormData
+                },
+                body: formData
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                console.log("✅ Avatar subido:", data);
+                // Aquí puedes actualizar el estado si necesitas mostrar el avatar actualizado
+                const URLimagen = "https://dockerapps.pulzo.com/threads" + data.path;
+                console.log(URLimagen);
+                actualizarHilo(index, "imagen", URLimagen || file.name); // opcional: usa `data.url` si el backend lo devuelve
+            } else {
+                console.error("❌ Error al subir avatar:", data.message);
+            }
+        } catch (error) {
+            console.error("❌ Error subiendo imagen:", error);
+        }
     };
+    
 
     const obtenerUbicacion = () => {
         if ("geolocation" in navigator) {

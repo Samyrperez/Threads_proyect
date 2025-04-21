@@ -63,6 +63,7 @@ const Home = () => {
                         <p className="no-posts">No hay publicaciones aún.</p>
                     ) : (
                         comentarios.map(({ comentario }, index) => {
+                            
                             if (!comentario || !comentario.usuario) return null;
 
                             return (
@@ -70,6 +71,7 @@ const Home = () => {
                                     key={comentario.id || index}
                                     id={comentario.id} // 👈 Agregado para que el componente tenga el ID
                                     usuario={{
+                                        id: comentario.usuario.id,
                                         name: comentario.usuario.name || "Usuario",
                                         username: comentario.usuario.username || "@desconocido",
                                         avatar: comentario.usuario.avatar
