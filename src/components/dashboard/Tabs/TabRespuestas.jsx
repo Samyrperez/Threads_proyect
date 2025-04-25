@@ -1,7 +1,7 @@
 const TabRespuestas = () => {
     return (
         <div>
-            {/* <p>Estas son tus respuestas 💬</p> */}
+            <p>Estas son tus respuestas 💬</p>
             
         </div>
     );

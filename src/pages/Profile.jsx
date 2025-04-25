@@ -5,15 +5,19 @@ import { editarPerfil } from "../api/perfil/editarPerfil";
 import Tabs from "../components/dashboard/Tabs/Tabs";
 import ModalAvatar from "../components/dashboard/Profile/ModalAvatar";
 import Publicacion from "../components/dashboard/Home/Publicacion";
+import { obtenerComentarios } from "../api/publicaciones/obtenerComentarios";
 import "../../src/css/profile.css";
 import "../../src/css/Tabs.css";
 
+
 const Profile = () => {
-    const [user, setUser] = useState(null); 
+    const [user, setUser] = useState(null);
     const [modalAbierto, setModalAbierto] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [activeTab, setActiveTab] = useState("hilos");
     const [error, setError] = useState(null);
+    const [publicaciones, setPublicaciones] = useState([]);
+
 
     useEffect(() => {
         const cargarPerfil = async () => {
@@ -30,6 +34,18 @@ const Profile = () => {
                 setUser(perfil);
                 console.log("👤 Usuario seteado:", perfil);
 
+                // Obtener comentarios y filtrar los del usuario
+                const comentariosData = await obtenerComentarios();
+                const comentariosUsuario = comentariosData.data?.filter(
+                    (comentario) => comentario.comentario.usuario.id === parseInt(userId)
+
+                ) || [];
+
+                console.log("📝 Publicaciones del usuario:", comentariosUsuario);
+                setPublicaciones(comentariosUsuario);
+                console.log("📤 Publicaciones seteadas en Profile:", comentariosUsuario);
+
+
             } catch (error) {
                 console.error("Error al cargar perfil:", error);
                 setError("Hubo un problema al cargar tu perfil.");
@@ -38,6 +54,11 @@ const Profile = () => {
 
         cargarPerfil();
     }, []);
+
+    useEffect(() => {
+        console.log("🧾 Prop publicaciones recibidas en Tabs:", publicaciones);
+    }, [publicaciones]);
+    
 
     const abrirModal = () => setModalAbierto(true);
     const cerrarModal = () => setModalAbierto(false);
@@ -107,21 +128,30 @@ const Profile = () => {
                 />
 
                 <div className="profile-tabs">
-                    <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+                    <Tabs
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
+                        publicaciones={publicaciones}
+                        avatar={avatar}
+                    />
+
 
                     {/* {activeTab === "hilos" && (
                         <div className="profile-user-posts">
-                            {publicaciones?.map((pub) => (
+                            {publicaciones.map((pub) => (
                                 <Publicacion
-                                    key={pub.id}
-                                    usuario={pub.usuario}
-                                    tiempo={pub.tiempo}
-                                    texto={pub.texto}
-                                    imagen={pub.imagen}
-                                    likes={pub.likes}
-                                    respuestas={pub.respuestas}
-                                    compartidos={pub.compartidos}
-                                    guardados={pub.guardados}
+                                    key={pub.comentario.id}
+                                    id={pub.comentario.id}
+                                    usuario={pub.comentario.usuario}
+                                    tiempo={pub.comentario.fecha_creacion}
+
+                                    texto={pub.comentario.contenido}
+                                    imagen={null} // si tiene imagen, ajusta aquí
+                                    likes={pub.comentario.me_gusta_total}
+                                    respuestas={pub.respuestas?.length || 0}
+                                    compartidos={0} // si tienes esa info
+                                    guardados={0} // si tienes esa info
+                                    comentarios={pub.respuestas || []}
                                 />
                             ))}
                         </div>

@@ -1,17 +1,25 @@
-import { useState } from "react";
+// import { useState } from "react";
 import "../../../css/profile.css";
 import "../../../css/Tabs.css";
 import TabHilos from "./TabHilos";
 import TabReposts from "./TabReposts";
 import TabRespuestas from "./TabRespuestas";
 
-const Tabs = () => {
-    const [activeTab, setActiveTab] = useState("hilos");
-
+const Tabs = ({ activeTab, setActiveTab, publicaciones, avatar }) => {
     const renderContent = () => {
         switch (activeTab) {
             case "hilos":
-                return <TabHilos />;
+                return (
+                    <TabHilos
+                        avatar={avatar}
+                        publicaciones={Array.isArray(publicaciones)
+                            // ? publicaciones.filter(
+                            //     (pub) => pub.comentario.comentario_padre_id === null
+                            // )
+                            // : []
+                        }
+                    />
+                );
             case "respuestas":
                 return <TabRespuestas />;
             case "reposts":
@@ -48,7 +56,9 @@ const Tabs = () => {
                 </div>
             </div>
 
-            <div className="tab-content">{renderContent()}</div>
+            <div className="tab-content">
+                {renderContent()}
+            </div>
         </div>
     );
 };

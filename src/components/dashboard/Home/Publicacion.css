@@ -3,10 +3,9 @@
     height: auto;
     background-color: #171717 !important;
     color: #fff;
-    /* border-radius: none !important; */
+
     padding: 16px;
     margin-bottom: 5px;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
     transition: transform 0.2s ease;
 
     /* border-radius: 15px; */
@@ -99,13 +98,17 @@
 }
 
 .post-media img {
-    width: 90%;
+    width: 50%;
     /* margin-left: -10px; */
     border-radius: 5px;
     margin-top: 5px;
-    max-height: 400px;
+    max-height: 100px;
     object-fit: cover;
 
+}
+.post-texto img {
+    width: 50%;
+    border-radius: 10px;
 }
 
 .contenido {

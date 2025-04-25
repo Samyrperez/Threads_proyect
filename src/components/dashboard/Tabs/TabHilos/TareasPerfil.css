@@ -1,7 +1,8 @@
 .tareas-perfil {
     
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 12px 12px 0px 0px;
+    border-bottom: 1px solid #444;
     margin-top: 16px;
     color: white;
     display: flex;

@@ -4,6 +4,7 @@ import { logoutUser } from "../api/auth/logout";
 import "../css/styles_dashboard.css";
 // import ThreadsLogo from "../components/dashboard/ThreadsLogo";
 import MenuIcon from "../components/icons/MenuIcon";
+import ThreadsLogo from "../components/dashboard/ThreadsLogo";
 import Sidebar from "../components/dashboard/Sidebar";
 import LogoSplash from "../components/dashboard/LogoSplash";
 import DropdownMenu from "../components/dashboard/DropdownMenu";
@@ -11,6 +12,7 @@ import MainContainer from "../components/dashboard/MainConatiner";
 import AddIcon from "../components/icons/AddIcon";
 import ModalHilo from "../components/dashboard/Tabs/TabHilos/ModalHilo";
 import "../components/dashboard/Tabs/TabHilos/ModalHilo.css";
+
 
 
 
@@ -92,6 +94,7 @@ const Dashboard = () => {
                         onClick={() => setShowDropdownMobile(prev => !prev)}
                     >
                         <MenuIcon active={showDropdownMobile} />
+                        <ThreadsLogo className="logo-responsive"/>
                     </div>
 
                     {showDropdownMobile && (

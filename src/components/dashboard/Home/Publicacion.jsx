@@ -6,6 +6,7 @@ import RepostIcon from "../../icons/RepostIcon";
 import SaveIcon from "../../icons/SaveIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
 import ModalPerfilUsuario from "../Home/ModalPerfilUsuario";
+import ModalRespuesta from "./MOdalRespuesta";
 import { darLikeComentario } from "../../../api/publicaciones/darLikeComentario";
 import { obtenerLikesComentario } from "../../../api/publicaciones/obtenerLikesComentario";
 import { eliminarLikeComentario } from "../../../api/publicaciones/eliminarLikeComentario";
@@ -28,6 +29,8 @@ const Publicacion = ({
     const [modalAbierto, setModalAbierto] = useState(false);
     const [likeCount, setLikeCount] = useState(likes);
     const [comentariosConLike, setComentariosConLike] = useState([]);
+    const [modalRespuestasAbierto, setModalRespuestasAbierto] = useState(false);
+
     
 
     const userId = parseInt(localStorage.getItem("userId"));
@@ -156,7 +159,7 @@ const Publicacion = ({
                 <div className="post-body">
                     <div className="post-header">
                         <div className="user-info">
-                            <span className="username">{usuario.username} // Este es el id: {id}</span>
+                            <span className="username">{usuario.username} Este es el id: {id}*</span>
                             <span className="time">{tiempo}</span>
                         </div>
                     </div>
@@ -178,10 +181,11 @@ const Publicacion = ({
                             <span>{likeCount}</span>
                         </span>
 
-                        <span>
+                        <span onClick={() => setModalRespuestasAbierto(true)} >
                             <CommentIcon />
                             <span>{respuestas}</span>
                         </span>
+
                         <span>
                             <RepostIcon />
                             <span>{compartidos}</span>
@@ -252,6 +256,20 @@ const Publicacion = ({
                     onClose={() => setModalAbierto(false)}
                 />
             )}
+
+            {modalRespuestasAbierto && (
+                <ModalRespuesta
+                onClose={() => setModalRespuestasAbierto(false)}
+                publicacion={{ usuario, texto, id }} // puedes pasar más campos si los usas luego
+                // respuestas={comentariosConLike}
+            />
+            
+            )}
+
+
+
+
+
         </div>
     );
 };

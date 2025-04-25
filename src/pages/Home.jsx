@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Publicar from "../components/dashboard/Tabs/TabHilos/Publicar";
 import Publicacion from "../components/dashboard/Home/Publicacion";
+import "../components/dashboard/Tabs/TabHilos/ModalHilo.css";
 import "../css/Home.css";
 import { obtenerComentarios } from "../../src/api/publicaciones/obtenerComentarios"; // ruta ajustada
 
@@ -69,7 +70,7 @@ const Home = () => {
                             return (
                                 <Publicacion
                                     key={comentario.id || index}
-                                    id={comentario.id} // 👈 Agregado para que el componente tenga el ID
+                                    id={comentario.id} 
                                     usuario={{
                                         id: comentario.usuario.id,
                                         name: comentario.usuario.name || "Usuario",
@@ -77,6 +78,7 @@ const Home = () => {
                                         avatar: comentario.usuario.avatar
                                             ? `https://dockerapps.pulzo.com/threads${comentario.usuario.avatar}`
                                             : "/default-avatar.png"
+                                        
                                     }}
                                     tiempo={new Date(comentario.fecha_creacion).toLocaleString()}
                                     texto={comentario.contenido || ""}
@@ -86,6 +88,7 @@ const Home = () => {
                                     compartidos={0}
                                     guardados={0}
                                     comentarios={comentario.comentarios || []}
+                                    
                                 />
                             );
                             

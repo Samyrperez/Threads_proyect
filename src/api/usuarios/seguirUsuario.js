@@ -1,18 +1,33 @@
-// src/api/usuarios/seguirUsuario.js
-export const seguirUsuario = async (seguidor_id, seguido_id) => {
+
+
+export const seguirUsuario = async (seguidorId, seguidoId, token, setSiguiendo) => {
+    if (seguidorId === seguidoId) {
+        alert("⛔ No puedes seguirte a ti mismo.");
+        return;
+    }
+
     try {
-        const response = await fetch(`https://dockerapps.pulzo.com/threads/api/usuarios/seguir?=${seguido_id}`, {
+        const response = await fetch("https://dockerapps.pulzo.com/threads/api/usuarios/seguir", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
             },
-            body: JSON.stringify({ seguidor_id, seguido_id }),
+            body: JSON.stringify({
+                seguidor_id: seguidorId,
+                seguido_id: seguidoId,
+            }),
         });
 
         const data = await response.json();
-        return data;
+
+        if (response.ok) {
+            console.log("✅ Ahora sigues al usuario:", data, seguidoId);
+            setSiguiendo(true);
+        } else {
+            console.error("❌ Error al seguir al usuario:", data.message);
+        }
     } catch (error) {
-        console.error("Error al seguir al usuario:", error);
-        return { code: 500, message: "Error de red o del servidor" };
+        console.error("❌ Error en la petición de seguir:", error);
     }
 };
