@@ -1,13 +1,13 @@
-.post-item {
+/* .post-item {
     display: flex;
-    align-items: flex-start; /* Cambiado de center a flex-start */
+    align-items: flex-start;
     padding: 16px;
     border: 1px solid #333;
     border-bottom: 1px solid #ddd;
 }
 
 .post-avatar {
-    margin-right: 12px; /* Alinea con separación del contenido */
+    margin-right: 12px;
 }
 
 .post-avatar img {
@@ -36,4 +36,4 @@
     border-radius: 10px;
     margin-top: 10px;
 }
-
+ */

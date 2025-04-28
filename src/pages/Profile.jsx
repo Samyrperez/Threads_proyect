@@ -65,8 +65,8 @@ const Profile = () => {
                 setPublicaciones(publicacionesUsuario);
                 setRespuestasUsuario(respuestasUsuario);
 
-                // console.log("📝 Hilos del usuario:", publicacionesUsuario);
-                // console.log("💬 Respuestas del usuario:", respuestasUsuario);
+                // console.log("Hilos del usuario:", publicacionesUsuario);
+                // console.log("Respuestas del usuario:", respuestasUsuario);
 
             } catch (error) {
                 console.error("Error al cargar perfil:", error);

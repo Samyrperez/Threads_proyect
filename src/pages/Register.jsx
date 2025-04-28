@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "../css/styles.css";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../api/auth/apiRegister"; // 👉 Importamos la función de API
-
+import { registerUser } from "../api/auth/apiRegister";
 const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -11,7 +10,7 @@ const Register = () => {
     const [error, setError] = useState("");
     const [showLogo, setShowLogo] = useState(true);
 
-    const navigate = useNavigate(); // ✅ useNavigate debe estar aquí
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -24,14 +23,13 @@ const Register = () => {
         e.preventDefault();
         setError("");
 
-        // Validación rápida
+        // Validación
         if (!name || !email || !password) {
             setError("Todos los campos son obligatorios.");
             return;
         }
 
         try {
-            // Llamada a la API (simulada o real)
             const data = await registerUser({ name, email, password });
 
             console.log("Respuesta de la API:", data);
@@ -41,7 +39,7 @@ const Register = () => {
                 localStorage.setItem("token", data.user.token);
             }
 
-            // Redirige al dashboard o login
+            // Redirigimos al login
             navigate("/login");
         } catch (err) {
             console.error("Error en el registro:", err);

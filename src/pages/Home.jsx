@@ -4,7 +4,7 @@ import Publicar from "../components/dashboard/Tabs/TabHilos/Publicar";
 import Publicacion from "../components/dashboard/Home/Publicacion";
 import "../components/dashboard/Tabs/TabHilos/ModalHilo.css";
 import "../css/Home.css";
-import { obtenerComentarios } from "../../src/api/publicaciones/obtenerComentarios"; // ruta ajustada
+import { obtenerComentarios } from "../../src/api/publicaciones/obtenerComentarios";
 
 const Home = () => {
     const [comentarios, setComentarios] = useState([]);
@@ -14,9 +14,9 @@ const Home = () => {
     useEffect(() => {
         const cargarDatos = async () => {
             try {
-                // 🔁 Cargar comentarios
+                // Cargar comentarios
                 const resultado = await obtenerComentarios();
-                console.log("📨 Comentarios recibidos en Home:", resultado);
+                console.log("Comentarios recibidos en Home:", resultado);
 
                 if (resultado && Array.isArray(resultado.data)) {
                     setComentarios(resultado.data);
@@ -25,7 +25,7 @@ const Home = () => {
                     setComentarios([]);
                 }
 
-                // 👤 Cargar avatar del usuario logueado (para Publicar)
+                //  Cargar avatar del usuario logueado
                 const userId = localStorage.getItem("userId");
                 const token = localStorage.getItem("token");
 

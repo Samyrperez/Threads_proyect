@@ -45,14 +45,14 @@ const Dashboard = () => {
     
     useEffect(() => {
         const timer = setTimeout(() => {
-            setShowLogo(false); // Oculta el logo después de 2 segundos
+            setShowLogo(false);
         }, 2000);
         return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // Cierra menú escritorio
+            // Cierre menú escritorio
             if (
                 dropdownDesktopRef.current &&
                 !dropdownDesktopRef.current.contains(event.target) &&
@@ -62,7 +62,7 @@ const Dashboard = () => {
                 setShowDropdownDesktop(false);
             }
     
-            // Cierra menú móvil
+            // Cierre menú móvil
             if (
                 dropdownMobileRef.current &&
                 !dropdownMobileRef.current.contains(event.target) &&
@@ -106,7 +106,7 @@ const Dashboard = () => {
 
                 </div>
 
-{/* Containers barra de contenido, main y btn-add */}
+            {/* Containers barra de contenido, main y btn-add */}
             <Sidebar
                 active={active}
                 setActive={setActive}

@@ -34,7 +34,7 @@ const Sidebar = ({ active, setActive, showDropdown, toggleDropdown, dropdownRef,
                 </a>
                 <a href="#" onClick={() => {
                     setActive("add");
-                    onAddClick(); // 👉 Mostrar modal
+                    onAddClick();
                 }}>
                     <AddIcon active={active === "add"} />
                 </a>

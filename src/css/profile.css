@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     width: 100% !important;
-    height: 100vh; /* ajusta según el header */
+    height: 100vh; 
     /* min-height: auto; */
     margin: 20px 35px 0px 35px;
     /* margin-top: 180px; */

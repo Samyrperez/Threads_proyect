@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../api/auth/apiLogin"; // Importa la función de login
-import "../css/styles.css"; // Importa el archivo CSS
+import { loginUser } from "../api/auth/apiLogin"; 
+import "../css/styles.css"; 
 
 const Login = () => {
     const [input, setInput] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
     
         useEffect(() => {
             const timer = setTimeout(() => {
-              setShowLogo(false); // Oculta el logo después de 3 segundos
+                setShowLogo(false); 
             }, 2000);
             return () => clearTimeout(timer);
         }, []);
@@ -25,28 +25,25 @@ const Login = () => {
         setError("");
 
         try {
-            // Aceptamos tanto email como username en el input
             
             const credentials = {
                 username: input,
                 password: password,
             }
 
-            const data = await loginUser(credentials); // Llama al backend
+            const data = await loginUser(credentials); 
 
             console.log("Respuesta del login:",data)
 
-            // Guarda el usuario y token
+            
             localStorage.setItem("usuario", JSON.stringify(data.user));
             localStorage.setItem("token", data.user.token);
             localStorage.setItem("userId", data.user.id);
 
 
-            // Limpia el formulario
             setInput("");
             setPassword("");
 
-            // Redirige
             navigate("/dashboard");
         } catch (error) {
             console.error("Error en el login:", error);
