@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import EditarPerfilModal from "../components/dashboard/Profile/EditarPerfilModal";
 import { obtenerPerfil } from "../api/perfil/obtenerPerfil";
 import { editarPerfil } from "../api/perfil/editarPerfil";
+import { obtenerComentarioUsuario } from "../api/publicaciones/obtenerComentariosUsuario";
 import Tabs from "../components/dashboard/Tabs/Tabs";
 import ModalAvatar from "../components/dashboard/Profile/ModalAvatar";
-import Publicacion from "../components/dashboard/Home/Publicacion";
-import { obtenerComentarios } from "../api/publicaciones/obtenerComentarios";
+// import { obtenerComentarios } from "../api/publicaciones/obtenerComentarios";
 import "../../src/css/profile.css";
 import "../../src/css/Tabs.css";
 
@@ -17,6 +17,9 @@ const Profile = () => {
     const [activeTab, setActiveTab] = useState("hilos");
     const [error, setError] = useState(null);
     const [publicaciones, setPublicaciones] = useState([]);
+    const [respuestasUsuario, setRespuestasUsuario] = useState([]);
+
+
 
 
     useEffect(() => {
@@ -30,21 +33,40 @@ const Profile = () => {
                 }
 
                 const perfil = await obtenerPerfil(userId);
-                console.log("Datos recibidos del perfil:", perfil);
                 setUser(perfil);
-                console.log("👤 Usuario seteado:", perfil);
 
-                // Obtener comentarios y filtrar los del usuario
-                const comentariosData = await obtenerComentarios();
-                const comentariosUsuario = comentariosData.data?.filter(
-                    (comentario) => comentario.comentario.usuario.id === parseInt(userId)
+                console.log("Datos del perfil del usuario logueado:", perfil)
+                const comentariosData = await obtenerComentarioUsuario(userId);
+                const comentarios = comentariosData.data || [];
+                
+                console.log("Comentarios:", comentarios)
 
-                ) || [];
+                const publicacionesUsuario = comentarios.filter(
+                    (comentario) =>
+                        comentario.usuario &&
+                        comentario.usuario.id === parseInt(userId) &&
+                        !comentario.comentario_padre 
+                );
 
-                console.log("📝 Publicaciones del usuario:", comentariosUsuario);
-                setPublicaciones(comentariosUsuario);
-                console.log("📤 Publicaciones seteadas en Profile:", comentariosUsuario);
+                console.log("Respuestas Usuario:", publicacionesUsuario)
 
+                const respuestasUsuario = comentarios.filter(
+                    (comentario) =>
+                        comentario.usuario &&
+                        comentario.usuario.id === parseInt(userId) &&
+                        comentario.comentario_padre 
+                );
+
+
+                console.log("Respuestas Usuario:", respuestasUsuario)
+                
+
+
+                setPublicaciones(publicacionesUsuario);
+                setRespuestasUsuario(respuestasUsuario);
+
+                // console.log("📝 Hilos del usuario:", publicacionesUsuario);
+                // console.log("💬 Respuestas del usuario:", respuestasUsuario);
 
             } catch (error) {
                 console.error("Error al cargar perfil:", error);
@@ -55,19 +77,14 @@ const Profile = () => {
         cargarPerfil();
     }, []);
 
-    useEffect(() => {
-        console.log("🧾 Prop publicaciones recibidas en Tabs:", publicaciones);
-    }, [publicaciones]);
-    
-
     const abrirModal = () => setModalAbierto(true);
     const cerrarModal = () => setModalAbierto(false);
 
     const guardarCambios = async (datosActualizados) => {
         try {
-            await editarPerfil(datosActualizados); // no importa si esto no devuelve data
+            await editarPerfil(datosActualizados);
             const userId = localStorage.getItem("userId");
-            const perfilActualizado = await obtenerPerfil(userId); // vuelve a consultar
+            const perfilActualizado = await obtenerPerfil(userId);
             setUser(perfilActualizado);
             cerrarModal();
         } catch (error) {
@@ -78,9 +95,9 @@ const Profile = () => {
     if (error) return <p className="error-text">{error}</p>;
     if (!user) return <p>Cargando perfil...</p>;
 
-    const { name, username, email, id, total_seguidores, description, avatar } = user;
+    const { name, username, total_seguidores, description, avatar } = user;
 
-
+    
 
     return (
         <div className="profile-container-wrapper">
@@ -90,8 +107,6 @@ const Profile = () => {
                         <div className="div">
                             <h2 className="name">{name}</h2>
                             <p className="username">{username}</p>
-                            {/* <p className="email">{email}</p>
-                            <p className="id">ID: {id}</p> */}
                         </div>
                         <div className="avatar-image">
                             <img
@@ -119,6 +134,7 @@ const Profile = () => {
                     </div>
                 </div>
 
+                
 
                 <EditarPerfilModal
                     isOpen={modalAbierto}
@@ -132,30 +148,9 @@ const Profile = () => {
                         activeTab={activeTab}
                         setActiveTab={setActiveTab}
                         publicaciones={publicaciones}
+                        respuestas={respuestasUsuario}
                         avatar={avatar}
                     />
-
-
-                    {/* {activeTab === "hilos" && (
-                        <div className="profile-user-posts">
-                            {publicaciones.map((pub) => (
-                                <Publicacion
-                                    key={pub.comentario.id}
-                                    id={pub.comentario.id}
-                                    usuario={pub.comentario.usuario}
-                                    tiempo={pub.comentario.fecha_creacion}
-
-                                    texto={pub.comentario.contenido}
-                                    imagen={null} // si tiene imagen, ajusta aquí
-                                    likes={pub.comentario.me_gusta_total}
-                                    respuestas={pub.respuestas?.length || 0}
-                                    compartidos={0} // si tienes esa info
-                                    guardados={0} // si tienes esa info
-                                    comentarios={pub.respuestas || []}
-                                />
-                            ))}
-                        </div>
-                    )} */}
                 </div>
             </div>
         </div>

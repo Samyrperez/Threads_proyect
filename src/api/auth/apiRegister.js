@@ -22,7 +22,7 @@ export async function registerUser({ name, email, password }) {
         }
         console.log(data.message)
 
-        return data; // Esperamos que contenga { usuario: { ... } }
+        return data; 
     } catch (error) {
         console.error("Error en apiRegister:", error);
         throw error;

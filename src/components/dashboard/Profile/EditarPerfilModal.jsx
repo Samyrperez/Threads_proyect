@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./EditarPerfilModal.css";
-import { subirAvatar } from "../../../api/perfil/subirAvatar"; // Importa la función para subir el avatar
+import { subirAvatar } from "../../../api/perfil/subirAvatar";
 
 const EditarPerfilModal = ({ isOpen, onClose, user, onSave }) => {
     const [bio, setBio] = useState("");
@@ -41,10 +41,10 @@ const EditarPerfilModal = ({ isOpen, onClose, user, onSave }) => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setSelectedFile(file); // lo guardás para subirlo después
+            setSelectedFile(file); 
             const reader = new FileReader();
             reader.onloadend = () => {
-                setAvatar(reader.result); // para la vista previa
+                setAvatar(reader.result);
             };
             reader.readAsDataURL(file);
         }
@@ -73,13 +73,13 @@ const EditarPerfilModal = ({ isOpen, onClose, user, onSave }) => {
                 avatar: avatarPath,
                 description: bio,
             };
-            console.log("📝 Datos enviados a editarPerfil:", datosActualizados);
+            console.log("Datos enviados a editarPerfil:", datosActualizados);
 
     
             await onSave(datosActualizados);
         } catch (err) {
             console.error(err);
-            alert("❌ Error al guardar los cambios.");
+            alert("Error al guardar los cambios.");
         }
     };
     
@@ -108,7 +108,7 @@ const EditarPerfilModal = ({ isOpen, onClose, user, onSave }) => {
                             <img
                                 src={
                                     avatar?.startsWith("data:")
-                                        ? avatar // base64 preview
+                                        ? avatar 
                                         : avatar
                                             ? `https://dockerapps.pulzo.com/threads${avatar}`
                                             : "/default-avatar.png"
@@ -136,14 +136,7 @@ const EditarPerfilModal = ({ isOpen, onClose, user, onSave }) => {
                         placeholder="Escribe algo sobre ti..."
                     />
 
-                    {/* <label>Enlace</label>
-                    <input
-                        className="modal-editar-body-input"
-                        type="text"
-                        value={link}
-                        onChange={(e) => setLink(e.target.value)}
-                        placeholder="Añade un enlace"
-                    /> */}
+                    
                 </div>
 
                 <div className="modal-editar-footer">

@@ -15,15 +15,15 @@ export async function subirAvatar(file) {
 
         if (!res.ok) {
             const text = await res.text();
-            console.error("🛑 Error al subir avatar:", text);
+            console.error("Error al tú avatar:", text);
             throw new Error("No se pudo subir el avatar");
         }
 
         const data = await res.json();
-        console.log("✅ Respuesta completa subirAvatar:", data); // 🔥
-        return data.path; // esto tiene que existir
+        console.log("Respuesta completa subirAvatar:", data); 
+        return data.path; 
     } catch (error) {
-        console.error("❌ Error real al subir avatar:", error);
+        console.error("Error real al subir avatar:", error);
         throw error;
     }
 }

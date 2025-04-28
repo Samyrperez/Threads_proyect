@@ -1,7 +1,7 @@
 const TabReposts = () => {
     return (
         <div>
-            <p>Tus reposts 🔁</p>
+            <p>Reposts </p>
             
         </div>
     );

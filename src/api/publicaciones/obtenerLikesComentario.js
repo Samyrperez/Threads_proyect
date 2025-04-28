@@ -10,7 +10,7 @@ export const obtenerLikesComentario = async (comentarioId) => {
 
         const data = await response.json();
 
-        console.log("🔍 Respuesta de likes para comentario", comentarioId, "=>", data);
+        // console.log("Respuesta de likes para comentario", comentarioId, "=>", data);
 
         return Array.isArray(data.data) ? data.data : [];
     } catch (error) {

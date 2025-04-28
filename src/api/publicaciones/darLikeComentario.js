@@ -18,10 +18,10 @@ export const darLikeComentario = async (comentarioId, userId) => {
         }
 
         const data = await response.json();
-        console.log("✅ Respuesta del servidor:", data);
+        console.log("Respuesta del servidor:", data);
         return data;
     } catch (error) {
-        console.error("❌ Error en darLikeComentario:", error);
+        console.error("Error en darLikeComentario:", error);
         throw error;
     }
 };

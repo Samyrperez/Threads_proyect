@@ -15,10 +15,10 @@ export const eliminarComentario = async (usuario_id, comentario_id) => {
         });
 
         const data = await response.json();
-        console.log("✅ Respuesta del servidor:", data);
+        console.log("Respuesta del servidor:", data);
         return data;
     } catch (error) {
-        console.error("❌ Error eliminando el comentario:", error);
+        console.error("Error eliminando el comentario:", error);
         return null;
     }
 };

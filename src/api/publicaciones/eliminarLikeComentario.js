@@ -6,7 +6,7 @@ export const eliminarLikeComentario = async (comentarioId, usuarioId) => {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}` // 👉 necesario para autenticar
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({ usuario_id: usuarioId })
         });
@@ -14,7 +14,7 @@ export const eliminarLikeComentario = async (comentarioId, usuarioId) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error("❌ Error eliminando like:", error);
+        console.error("Error eliminando like:", error);
         return null;
     }
 };

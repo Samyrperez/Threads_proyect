@@ -21,7 +21,7 @@ const Home = () => {
                 if (resultado && Array.isArray(resultado.data)) {
                     setComentarios(resultado.data);
                 } else {
-                    console.warn("⚠️ No se recibió un array en 'data':", resultado);
+                    console.warn("No se recibió un array en 'data':", resultado);
                     setComentarios([]);
                 }
 
@@ -43,7 +43,7 @@ const Home = () => {
                     }
                 }
             } catch (err) {
-                console.error("❌ Error cargando datos:", err);
+                console.error("Error cargando los datos:", err);
             } finally {
                 setCargando(false);
             }

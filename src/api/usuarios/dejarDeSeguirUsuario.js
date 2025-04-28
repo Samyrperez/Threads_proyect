@@ -20,12 +20,12 @@ export const dejarDeSeguirUsuario = async (seguidorId, seguidoId, token, setSigu
         const data = await response.json();
 
         if (response.ok) {
-            console.log("👋 Dejaste de seguir al usuario:", data);
+            console.log("Dejaste de seguir al usuario:", data);
             setSiguiendo(false);
         } else {
-            console.error("❌ Error al dejar de seguir:", data.message);
+            console.error("Error al dejar de seguir:", data.message);
         }
     } catch (error) {
-        console.error("❌ Error en la petición de dejar de seguir:", error);
+        console.error("Error en la petición de dejar de seguir:", error);
     }
 };

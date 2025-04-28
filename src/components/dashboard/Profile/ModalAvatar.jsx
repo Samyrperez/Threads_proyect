@@ -1,18 +1,18 @@
-// src/components/ModalAvatar.jsx
+
 import React from "react";
 
-import "../../dashboard/Profile/ModalAvatar.css"; // Asegúrate de que la ruta sea correcta
+import "../../dashboard/Profile/ModalAvatar.css"; 
 const ModalAvatar = ({ imageUrl, onClose }) => {
     return (
         <div className="modal-avatar-overlay" onClick={onClose}>
             <div className="modal-avatar-content" onClick={(e) => e.stopPropagation()}>
             <img
                     src={
-                        imageUrl?.startsWith("data:") // Vista previa en base64 (cuando estás editando)
+                        imageUrl?.startsWith("data:") 
                             ? imageUrl
                             : imageUrl
-                                ? `https://dockerapps.pulzo.com/threads${imageUrl}` // Ruta relativa del backend
-                                : "/default-avatar.png" // Por si no hay avatar
+                                ? `https://dockerapps.pulzo.com/threads${imageUrl}` 
+                                : "/default-avatar.png" 
                     }
                     alt="Avatar"
                     className="modal-avatar-image"

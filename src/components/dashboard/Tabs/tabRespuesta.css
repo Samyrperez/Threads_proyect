@@ -1,0 +1,11 @@
+respuesta-item-profile {
+    display: flex;
+    flex-direction: column;
+}
+.publicacion-original-profil {
+    display: flex;
+}
+
+.publicacion-original-profil img {
+    width: 50% !important;
+}

@@ -19,7 +19,7 @@ export const crearComentario = async (usuarioId, contenido) => {
 
         if (!response.ok) {
             const errorData = await response.json();
-            console.error("🛑 Error recibido:", errorData);
+            console.error("Error recibido:", errorData);
             throw new Error(errorData.error || "Error al crear el comentario");
         }
 
@@ -27,7 +27,7 @@ export const crearComentario = async (usuarioId, contenido) => {
         console.log("✅ Comentario creado:", data);
         return data;
     } catch (error) {
-        console.error("❌ Error al crear el comentario:", error);
+        console.error("Error al crear el comentario:", error);
         throw error;
     }
 };

@@ -2,7 +2,7 @@
 
 export const seguirUsuario = async (seguidorId, seguidoId, token, setSiguiendo) => {
     if (seguidorId === seguidoId) {
-        alert("⛔ No puedes seguirte a ti mismo.");
+        alert(" No puedes seguirte a ti mismo.");
         return;
     }
 
@@ -22,12 +22,12 @@ export const seguirUsuario = async (seguidorId, seguidoId, token, setSiguiendo) 
         const data = await response.json();
 
         if (response.ok) {
-            console.log("✅ Ahora sigues al usuario:", data, seguidoId);
+            console.log("Ahora sigues al usuario:", data, seguidoId);
             setSiguiendo(true);
         } else {
-            console.error("❌ Error al seguir al usuario:", data.message);
+            console.error(" Error al seguir al usuario:", data.message);
         }
     } catch (error) {
-        console.error("❌ Error en la petición de seguir:", error);
+        console.error("Error en la petición de seguir:", error);
     }
 };

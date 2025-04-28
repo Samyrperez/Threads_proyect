@@ -19,7 +19,7 @@ export const obtenerSeguidores = async (usuarioId) => {
         const data = await response.json();
         return data.data || [];
     } catch (error) {
-        console.error("❌ Error en obtenerSeguidores:", error);
+        console.error(" Error en obtenerSeguidores:", error);
         return [];
     }
 };

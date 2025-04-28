@@ -13,9 +13,9 @@ const obtenerUsuario = async (userId, token) => {
         }
 
         const data = await response.json();
-        return { data }; // así se parece a axios
+        return { data };
     } catch (error) {
-        console.error("❌ Error al obtener información del usuario:", error);
+        console.error("Error al obtener información del usuario:", error);
         return null;
     }
 };

@@ -15,7 +15,7 @@ export async function loginUser(credentials) {
     console.log("Respuesta del login:", data);
 
     if (!response.ok) {
-        // Muestra más detalles del error
+        
         throw new Error(data.message || JSON.stringify(data) || "Error al iniciar sesión.");
     }
 

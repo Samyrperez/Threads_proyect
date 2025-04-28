@@ -13,6 +13,7 @@ import { eliminarLikeComentario } from "../../../api/publicaciones/eliminarLikeC
 import { eliminarComentario } from "../../../api/publicaciones/eliminarComentario";
 
 
+
 const Publicacion = ({
     id,
     usuario,
@@ -30,6 +31,9 @@ const Publicacion = ({
     const [likeCount, setLikeCount] = useState(likes);
     const [comentariosConLike, setComentariosConLike] = useState([]);
     const [modalRespuestasAbierto, setModalRespuestasAbierto] = useState(false);
+    // const [respuestasCount, setRespuestasCount] = useState(respuestas)  
+    
+
 
     
 
@@ -82,8 +86,8 @@ const Publicacion = ({
     };
     
     const handleEliminarComentario = async (comentarioId) => {
-        console.log("🧪 Usuario logueado:", userId);
-        console.log("🧪 Comentario :", comentarioId);
+        console.log(" Usuario logueado:", userId);
+        console.log(" Comentario :", comentarioId);
         const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este comentario?");
         if (!confirmDelete) return;
     
@@ -110,7 +114,7 @@ const Publicacion = ({
                 const yaDioLike = usuariosQueDieronLike.some(u => u.id === userId);
                 setLiked(yaDioLike);
             } catch (error) {
-                console.error("❌ Error verificando like en la publicación:", error);
+                console.error("Error verificando like en la publicación:", error);
             }
         };
 
@@ -141,10 +145,11 @@ const Publicacion = ({
         return txt.value;
     };
 
-    const avatarUrl = usuario.avatar?.startsWith("/uploads")
-        ? `https://dockerapps.pulzo.com/threads${usuario.avatar}`
-        : usuario.avatar || "/default-avatar.png";
+    
 
+    // console.log("📦 respuestas recibidas:", respuestas);
+
+    
     return (
         <div className="post">
             <div className="container-posts">
@@ -153,13 +158,13 @@ const Publicacion = ({
                     onClick={() => setModalAbierto(true)}
                     style={{ cursor: "pointer" }}
                 >
-                    <img src={avatarUrl} className="avatar" alt="avatar" />
+                    <img src={usuario.avatar} className="avatar" alt="avatar" />
                 </div>
 
                 <div className="post-body">
                     <div className="post-header">
                         <div className="user-info">
-                            <span className="username">{usuario.username} Este es el id: {id}*</span>
+                            <span className="username">{usuario.username}</span>
                             <span className="time">{tiempo}</span>
                         </div>
                     </div>
@@ -199,54 +204,6 @@ const Publicacion = ({
                         </span>
                     </div>
 
-                    {/* {comentarios.length > 0 && (
-                        
-                        <div className="comentarios">
-                            {comentariosConLike.map((comentario) => {
-                                
-                                const avatarComentario = comentario.usuario.avatar?.startsWith("/uploads")
-                                    ? `https://dockerapps.pulzo.com/threads${comentario.usuario.avatar}`
-                                    : comentario.usuario.avatar || "/default-avatar.png";
-
-                                const imagenBase64 = comentario.contenido?.match(/src="([^"]+)"/);
-
-                                return (
-                                    <div key={comentario.id} className="comentario">
-                                        <div className="comentario-header">
-                                            <img src={avatarComentario} alt="avatar" className="avatar" />
-                                            <div>
-                                                <strong>{comentario.usuario.name}</strong>{" "}
-                                                <span className="username">{comentario.usuario.username}{comentario.id} </span>
-                                            </div>
-
-                                            {comentario.usuario.id === userId && (
-                                                <DeleteIcon onClick={() => handleEliminarComentario(comentario.id)} />
-                                            )}
-                                        </div>
-
-
-                                        <div className="contenido">
-                                            {imagenBase64 && (
-                                                <img src={imagenBase64[1]} alt="contenido" />
-                                            )}
-
-                                            <div
-                                                className="like-comentario"
-                                                onClick={() => handleLikeComentario(comentario.id)}
-                                            >
-                                                <HeartIcon
-                                                    filled={comentario.me_gusta_usuario}
-                                                    color={comentario.me_gusta_usuario ? "red" : "currentColor"}
-                                                />
-                                                <span>{comentario.me_gusta_total || 0}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-            
-                    )} */}
                 </div>
             </div>
 
@@ -259,16 +216,12 @@ const Publicacion = ({
 
             {modalRespuestasAbierto && (
                 <ModalRespuesta
-                onClose={() => setModalRespuestasAbierto(false)}
-                publicacion={{ usuario, texto, id }} // puedes pasar más campos si los usas luego
-                // respuestas={comentariosConLike}
+                    onClose={() => setModalRespuestasAbierto(false)}
+                    publicacion={{ usuario, texto, id }} // puedes pasar más campos si los usas luego
+                    // respuestas={comentariosConLike}
             />
             
             )}
-
-
-
-
 
         </div>
     );

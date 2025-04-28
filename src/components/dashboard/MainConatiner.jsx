@@ -17,8 +17,6 @@ const MainContainer = ({ user, active }) => {
                 return <Home user={user} />;
             case "search":
                 return <Search />;
-            // case "add":
-            //     return <Add />;
             case "favorites":
                 return <Favorites />;
             case "profile":

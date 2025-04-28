@@ -1,27 +1,33 @@
 // import { useState } from "react";
+import { useEffect } from "react";
 import "../../../css/profile.css";
 import "../../../css/Tabs.css";
 import TabHilos from "./TabHilos";
 import TabReposts from "./TabReposts";
 import TabRespuestas from "./TabRespuestas";
 
-const Tabs = ({ activeTab, setActiveTab, publicaciones, avatar }) => {
+const Tabs = ({ activeTab, setActiveTab, publicaciones, respuestas, avatar }) => {
+
+    console.log(publicaciones)
     const renderContent = () => {
         switch (activeTab) {
             case "hilos":
                 return (
                     <TabHilos
                         avatar={avatar}
-                        publicaciones={Array.isArray(publicaciones)
-                            // ? publicaciones.filter(
-                            //     (pub) => pub.comentario.comentario_padre_id === null
-                            // )
-                            // : []
-                        }
+                        publicaciones={publicaciones}
                     />
+
                 );
             case "respuestas":
-                return <TabRespuestas />;
+                return (
+                    <TabRespuestas 
+                        respuestas={respuestas} 
+                        publicaciones = {publicaciones}
+                    />
+
+
+                );
             case "reposts":
                 return <TabReposts />;
             default:
@@ -32,6 +38,10 @@ const Tabs = ({ activeTab, setActiveTab, publicaciones, avatar }) => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+
+    useEffect(() => {
+        console.log("🧪 Tab activa:", activeTab);
+    }, [activeTab]);
 
     return (
         <div className="tabs-container">

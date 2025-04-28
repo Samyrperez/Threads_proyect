@@ -9,12 +9,10 @@ import obtenerRespuestas from "../../../api/publicaciones/obtenerRespuestas";
 
 
 
-const ModalRespuesta = ({ publicacion, onClose, respuestas: respuestasProp }) => {
+const ModalRespuesta = ({ publicacion, onClose, respuestas: respuestasProp, onNuevaRespuesta }) => {
     const [usuarioLogueado, setUsuarioLogueado] = useState(null);
     const [respuestaTexto, setRespuestaTexto] = useState("");
     const [respuestas, setRespuestas] = useState(respuestasProp || []);
-
-    
 
     
     useEffect(() => {
@@ -40,50 +38,54 @@ const ModalRespuesta = ({ publicacion, onClose, respuestas: respuestasProp }) =>
 
     
 
-const manejarRespuesta = async () => {
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
+    const manejarRespuesta = async () => {
+        const userId = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
 
-    if (!userId || !token || !respuestaTexto.trim()) return;
+        if (!userId || !token || !respuestaTexto.trim()) return;
 
-    const payload = {
-        usuario_id: parseInt(userId),
-        comentario_padre_id: publicacion.id,
-        contenido: respuestaTexto.trim(),
-    };
+        const payload = {
+            usuario_id: parseInt(userId),
+            comentario_padre_id: publicacion.id,
+            contenido: respuestaTexto.trim(),
+        };
 
-    try {
-        console.log("🧾 Enviando payload:", payload);
-        const response = await fetch("https://dockerapps.pulzo.com/threads/api/comentarios/responder", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(payload),
-        });
+        try {
+            console.log("🧾 Enviando payload:", payload);
+            const response = await fetch("https://dockerapps.pulzo.com/threads/api/comentarios/responder", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(payload),
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        if (data?.data) {
-            console.log("✅ Respuesta enviada correctamente");
-            console.log("📝 Datos de la respuesta:", data.data);
-            setRespuestas((prev) => [...prev, data.data]);
-            setRespuestaTexto("");
+            if (data?.data) {
+                console.log("Respuesta enviada correctamente");
+                console.log("Datos de la respuesta:", data.data);
+                setRespuestas((prev) => [...prev, data.data]);
+                setRespuestaTexto("");
 
+                if (onNuevaRespuesta) {
+                    onNuevaRespuesta();
+                }
+
+                
+                const nuevasRespuestas = await obtenerRespuestas({ userId, token });
+                console.log("📥 Respuestas actualizadas:", nuevasRespuestas);
             
-            const nuevasRespuestas = await obtenerRespuestas({ userId, token });
-            console.log("📥 Respuestas actualizadas:", nuevasRespuestas);
-        
 
-        } else {
-            alert("❌ No se pudo guardar la respuesta");
+            } else {
+                alert("❌ No se pudo guardar la respuesta");
+            }
+        } catch (error) {
+            console.error("❌ Error al enviar la respuesta:", error);
+            alert("Error al responder el comentario.");
         }
-    } catch (error) {
-        console.error("❌ Error al enviar la respuesta:", error);
-        alert("Error al responder el comentario.");
-    }
-};
+    };
 
     useEffect(() => {
         const fetchRespuestas = async () => {
@@ -104,11 +106,11 @@ const manejarRespuesta = async () => {
                 const data = await response.json();
     
                 if (data?.data) {
-                    console.log("✅ Respuestas cargadas:", data.data);
+                    console.log("Respuestas cargadas:", data.data);
                     setRespuestas(data.data);
                 }
             } catch (err) {
-                console.error("❌ Error al obtener respuestas:", err);
+                console.error("Error al obtener respuestas:", err);
             }
         };
     
@@ -121,9 +123,7 @@ const manejarRespuesta = async () => {
     if (!publicacion) return null;
 
     const avatarOriginal = publicacion.usuario?.avatar || "/default-avatar.png";
-    // const avatarUsuarioLogueado = usuarioLogueado?.data?.avatar
-    //     ? `https://dockerapps.pulzo.com/threads${usuarioLogueado.data.avatar}`
-    //     : "/default-avatar.png";
+    
 
 
 
@@ -156,16 +156,6 @@ const manejarRespuesta = async () => {
                     </div>
 
                     <div className="responder-Modal-respuesta">
-                        {/* <div className="Crear-nuevo-comentario">
-                            <img src={avatarUsuarioLogueado} alt="avatar" className="avatar-Modal-respuesta" />
-                            <textarea
-                                placeholder="Escribe tu respuesta..."
-                                rows="3"
-                                value={respuestaTexto}
-                                onChange={(e) => setRespuestaTexto(e.target.value)}
-                            />
-
-                        </div> */}
 
                         <div className="respuestas-guardadas">
                             

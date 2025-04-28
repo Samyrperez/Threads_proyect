@@ -3,7 +3,7 @@ export const editarPerfil = async (datosActualizados) => {
         const token = localStorage.getItem("token");
 
         if (!token) {
-            throw new Error("Token no encontrado. Por favor, iniciá sesión.");
+            throw new Error("Token no encontrado. Por favor, iniciá sesión nuvamente.");
         }
 
         const response = await fetch("https://dockerapps.pulzo.com/threads/api/usuarios/perfil", {

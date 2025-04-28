@@ -1,6 +1,5 @@
 import "../css/styles_dashboard.css";
-import AddIcon from "../dashboard/components/icons/AddIcon"; // ajustá la ruta si estás en otra carpeta
-
+import AddIcon from "../dashboard/components/icons/AddIcon"; 
 
 const BtnFloating = () => {
     return (

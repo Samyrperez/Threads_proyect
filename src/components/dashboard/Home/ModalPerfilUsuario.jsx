@@ -30,7 +30,7 @@ const ModalPerfilUsuario = ({ usuarioASeguir, onClose }) => {
 
     if (!usuarioASeguir) return null;
     if (!seguidorId || !token) {
-        console.error("⛔ No hay usuario autenticado o token");
+        console.error("No hay usuario autenticado o token");
         return null;
     }
 
@@ -43,6 +43,10 @@ const ModalPerfilUsuario = ({ usuarioASeguir, onClose }) => {
         } else {
             await seguirUsuario(seguidorId, usuarioASeguirId, token, setSiguiendo);
         }
+
+        // Actualizar los seguidores
+        const listaSeguidores = await obtenerSeguidores(usuarioASeguirId);
+        setSeguidores(listaSeguidores.length);
     };
     
 

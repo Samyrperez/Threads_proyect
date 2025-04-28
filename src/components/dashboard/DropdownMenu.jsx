@@ -1,4 +1,4 @@
-// src/components/DropdownMenu.jsx
+
 import React from "react";
 
 const DropdownMenu = ({ dropdownRef, onLogout }) => {
