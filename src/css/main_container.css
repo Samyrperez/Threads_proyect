@@ -1,0 +1,99 @@
+
+* {
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #444 #111;
+    /* Firefox */
+}
+
+.container-main {
+    flex: 1;
+    /* overflow-y: auto; */
+    height: 100vh;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-info strong {
+    font-size: 0.9rem;
+}
+
+.post-info span {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.post-content {
+    margin-bottom: 0.5rem;
+}
+
+.post-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #ddd;
+}
+
+.post-media {
+    margin: 0.5rem 0;
+}
+
+.post-media img,
+.post-media video {
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+}
+
+.post-actions span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+}
+
+.post-actions span:hover {
+    color: #fff;
+}
+
+.post-list {
+    width: 110%;
+    padding: 0px;
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    margin: 0;
+
+}
+
+@media screen and (max-width: 768px) {
+    .container-main {
+        flex: 1;
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+        padding: 80px 20px 20px 20px;
+        /* margen superior para evitar header móvil */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px;
+        overflow-x: hidden;
+    }
+}

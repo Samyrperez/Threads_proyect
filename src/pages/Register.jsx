@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import "../css/styles.css";
 import Footer from "../components/Footer";
-
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../api/auth/apiRegister";
 const Register = () => {
-    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showLogo, setShowLogo] = useState(true);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const timer = setTimeout(() => {
-          setShowLogo(false); // Oculta el logo después de 2 segundos
+           setShowLogo(false); 
         }, 2000);
         return () => clearTimeout(timer);
     }, []);
@@ -20,8 +23,28 @@ const Register = () => {
         e.preventDefault();
         setError("");
 
-        console.log("Intentando registrarse con:", username, email, password);
-        // Aquí puedes manejar la lógica de registro cuando conectes el backend
+        // Validación
+        if (!name || !email || !password) {
+            setError("Todos los campos son obligatorios.");
+            return;
+        }
+
+        try {
+            const data = await registerUser({ name, email, password });
+
+            console.log("Respuesta de la API:", data);
+
+            if (data.user) {
+                localStorage.setItem("usuario", JSON.stringify(data.user));
+                localStorage.setItem("token", data.user.token);
+            }
+
+            // Redirigimos al login
+            navigate("/login");
+        } catch (err) {
+            console.error("Error en el registro:", err);
+            setError(err.message || "Ocurrió un error al registrarse.");
+        }
     };
 
     return (
@@ -47,9 +70,9 @@ const Register = () => {
                     <form onSubmit={handleRegister}>
                         <input
                             type="text"
-                            placeholder="Nombre de usuario"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Nombre completo"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="input-field"
                             required
                         />

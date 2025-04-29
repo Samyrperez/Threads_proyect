@@ -1,0 +1,252 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-editar-content {
+    background-color: #1a1a1a;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+
+
+}
+
+.modal-editar-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.modal-editar-footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.save-btn {
+    background-color: white;
+    color: black;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal-editar-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 10px;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #161616;
+    color: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.close-modal-editar-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.user-info-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    border-bottom: #333 1px solid;
+}
+
+.modal-editar-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.modal-editar-avatar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+.user-name {
+    font-size: 15px;
+    color: #ccc;
+}
+
+.modal-editar-user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    /* gap: 10px; */
+    margin: 0;
+
+}
+
+.modal-editar-user-info h3,
+p {
+    font-size: 14px;
+    height: 8px;
+}
+
+.modal-editar-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-editar-body h3 {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 2px;
+    height: 8px;
+}
+
+.modal-editar-body-textarea {
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+    height: 80px;
+}
+
+.modal-editar-body-input {
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+
+.modal-editar-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.save-btn {
+    background-color: white;
+    width: 100%;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.save-btn:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+
+@keyframes slide-up {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* .dropdown-avatar {
+    background-color: #333 !important;
+    position: absolute;
+    background: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    top: 26%;
+    transform: translateX(-45%);
+    z-index: 10;
+}
+
+.upload-label {
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+} */
+.avatar-label {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+}
+
+.avatar-label:hover::after {
+    content: "Cambiar foto";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .close-modal-editar-btn {
+        display: block;
+
+    }
+
+}

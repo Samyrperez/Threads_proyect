@@ -1,0 +1,392 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #0e0d0d;
+}
+/* Logo de entrada */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    filter: invert(1);
+    
+}
+
+.center-logo {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Estilos generales para el contenedor principal */
+.dashboard-container {
+    overflow-y: visible;
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #0e0d0d;
+    display: flex;
+    justify-content: center;
+    /* overflow-x: hidden; */
+}
+
+
+.dashboard-container h2,
+p {
+    color: #000;
+}
+
+/* logo */
+.logo{
+    width: 35px;
+    margin-top: 15px;
+    filter: invert(1);
+    transition: filter 0.3s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Estilos para la barra de navegación superior */
+.logoAndMenu {
+    display: none !important;
+}
+
+.logo-responsive,
+.menu-responsive {
+    display: none;
+}
+
+.logo-responsive {
+    width: 40px;
+    margin-top: 15px;
+    cursor: pointer;
+    filter: invert(1);
+}
+
+.menu-responsive  {
+    position: relative;;
+    width: 35px;
+    cursor: pointer;
+    
+}
+
+/* Barra lateral izquierda */
+
+
+.icon {
+    width: 30px;
+    height: 30px;
+    color:  #555;
+    margin-top: 15px;
+    transition: color 0.3s ease;
+    padding-bottom: 7px;
+}
+
+.icon.active {
+    color:  #fff;
+}
+
+.container-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 5%;
+    background-color: #0e0d0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    margin-left: 10px;
+}
+
+/* NAV */
+.nav-dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-dashboard a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 12px;
+    border-radius: 10px;
+    
+}
+/* .nav-dashboard a svg {
+    width: 24px;
+    height: 24px;
+    color: #525252;
+    
+    transition: transform 0.2s ease;
+} */
+
+.nav-dashboard a:hover {
+    background-color: #171717;
+    transform: scale(1.1);
+
+}
+
+
+/* Menú */
+.container-menu {
+    position: relative; 
+    cursor: pointer;
+}
+.menu-dropdown {
+    position: absolute;
+    top: 0; /* debajo del contenedor */
+    left: 90%;  /* alineado al borde derecho */
+    transform: translateY(-90%);
+    margin-left: 8px;
+    background-color: #171717;
+    border: 1px solid #333;
+    padding: 10px 15px;
+    border-radius: 20px;
+    
+    padding: 15px;
+    z-index: 999;
+    min-width: 220px;
+    animation: fadeIn 0.2s ease-in-out;
+}
+/* Animación de entrada hacia arriba */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(-120%); }
+    to { opacity: 1; transform: translateY(-100%); }
+}
+
+.menu-dropdown ul {
+    list-style: none;
+    padding: 0px 10px;
+    margin: 0;
+}
+
+.menu-dropdown li:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.menu-dropdown li {
+    margin: 15px 0;
+    width: 100%;
+    padding: 8px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.menu-dropdown li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Botón flotante a la derecha */
+.container-btnFloating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    width: 82px;
+    height: auto;
+
+}
+
+.container-btnFloating button {
+    width: 68px;
+    height: 68px;
+    background-color: #171717;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.container-btnFloating button {
+    margin: 0px 40px 20px 0px;
+    width: 100%;
+    background-color: #171717;
+    border: solid 1px #373838;
+    border-radius: 15px;
+}
+
+.btn-floating img {
+    width: 35px;
+
+}
+
+.btn-floating:hover {
+    transform: scale(1.1);
+
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        background-color: #0e0d0d;
+    }
+    .dashboard-container{
+        justify-content: space-between;
+    }
+
+    .logo,
+    .container-btnFloating,
+    .container-menu {
+        display: none;
+    }
+
+    .dashboard-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+    position: relative;
+
+    }
+
+    .nav-dashboard {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 0px;
+        padding: 15px 10px;
+        width: 100%;
+        height: 30px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #0e0d0d;
+        
+        
+    }
+    .nav-dashboard a {
+        padding: 0px 30px;
+        border-radius: 10px;
+    }
+    .nav-dashboard a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: transform 0.2s ease;
+    }
+
+    .container-sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+        position: relative;
+        opacity: 0.8;
+        
+    }
+
+
+    .logoAndMenu {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        background-color: #0e0d0d;
+        opacity: 0.6;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 900;
+        
+    }
+    .logo-responsive,
+    .menu-responsive {
+        display: block !important;
+    }
+
+    .logo-responsive {
+        width: 40px;
+        margin-top: 10px;
+        cursor: pointer;
+        filter: invert(1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* transition: transform 0.3s ease, filter 0.3s ease-in-out; */
+        /* transform-origin: center center; */
+        /* position: absolute; */
+        position: fixed;
+        left: 50%;
+        
+        top: 10px;
+        
+
+    }   
+
+    /* .logo-responsive:hover {
+        transform: scale(1.1);
+        transition: transform 0.2s ease, filter 0.3s ease-in-out;
+        
+    } */
+
+    
+    .menu-responsive {
+        position: fixed;
+        right: 20px;
+        top: 10px;
+    }
+    
+    @keyframes dropdownFadeInMobile {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+    
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .menu-dropdown {
+        position: fixed;
+        top: 290px;   
+        background-color: #171717;
+        /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); */
+        border-radius: 20px;
+        padding: 10px;
+        margin-right: 10px;
+        width: 35%;
+        right: 7%;
+        left: auto;
+        z-index: 999;
+
+    }
+    
+    /* .menu-responsive:hover {
+        transform: scale(1.2);
+        transition: transform 0.2s ease, filter 0.3s ease-in-out;
+        filter: invert(1);
+    }
+     */
+}

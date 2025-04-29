@@ -1,0 +1,63 @@
+.publicar-container {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+    background-color: #171717;
+}
+
+.publicar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.publicar-header button  {
+    background: none !important;
+    /* color: #aaa; */
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: solid 1px #333;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+button{
+    color: #fff;
+    size: bold;
+}
+
+.avatar-publicar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.input-publicar {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    /* all: unset; */
+    color: white;
+    font-size: 14px;
+    padding: 0.5rem;
+}
+
+.input-publicar:focus {
+    outline: none;
+    
+}
+.publicar {
+    all: unset;
+    background-color: #3a3a3a;
+    color: #aaa;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.2s ease;
+}
+.publicar:hover {
+    background-color: #444;
+} 
+

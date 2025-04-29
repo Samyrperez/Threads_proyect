@@ -1,0 +1,39 @@
+/* .post-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    border: 1px solid #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-avatar {
+    margin-right: 12px;
+}
+
+.post-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.post-content {
+    margin-left: 12px;
+    flex: 1;
+}
+
+.post-header {
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+}
+
+.post-text {
+    margin: 8px 0;
+}
+
+.post-media img {
+    max-width: 50%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+ */

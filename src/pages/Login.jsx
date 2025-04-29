@@ -1,29 +1,58 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import "../css/styles.css"; // Importa el archivo CSS
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/auth/apiLogin"; 
+import "../css/styles.css"; 
 
 const Login = () => {
     const [input, setInput] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showLogo, setShowLogo] = useState(true);
+    const navigate = useNavigate();
+
     
         useEffect(() => {
             const timer = setTimeout(() => {
-              setShowLogo(false); // Oculta el logo después de 3 segundos
+                setShowLogo(false); 
             }, 2000);
             return () => clearTimeout(timer);
         }, []);
 
+        
     async function handleLogin(e) {
         e.preventDefault();
         setError("");
 
-        console.log("Intentando iniciar sesión con:", input, password);
+        try {
+            
+            const credentials = {
+                username: input,
+                password: password,
+            }
 
-        // Aquí puedes manejar la autenticación cuando integres el backend
-    } 
+            const data = await loginUser(credentials); 
 
+            console.log("Respuesta del login:",data)
+
+            
+            localStorage.setItem("usuario", JSON.stringify(data.user));
+            localStorage.setItem("token", data.user.token);
+            localStorage.setItem("userId", data.user.id);
+
+
+            setInput("");
+            setPassword("");
+
+            navigate("/dashboard");
+        } catch (error) {
+            console.error("Error en el login:", error);
+            setError(error.message || "Error al iniciar sesión");
+        }
+    }
+
+
+    
     return (
         <div className="page-container">
             {showLogo && (
@@ -34,7 +63,7 @@ const Login = () => {
                         className="center-logo"
                     />
                 </div>
-            )};
+            )}
             <div className="login-container">
                 <div className="login-box">
                     <img
@@ -78,7 +107,7 @@ const Login = () => {
                                 className="logo-instagram"
                             />
                             <p>Ir a Instagram  </p>
-                            <img src="./src/image/MayorQue_menor.png" alt="Ir" />
+                            <img src="./src/image/MayorQue_menor.png" alt="Ir" className="ir-instagram"/>
                         </button>
                     </a>
                     

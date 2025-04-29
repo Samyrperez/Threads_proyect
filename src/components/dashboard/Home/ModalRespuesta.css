@@ -1,0 +1,172 @@
+.modal-respuesta-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    background-color: rgba(15, 15, 15, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto;
+}
+.scroll-contenido-respuesta {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #1c1c1c;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem; /* nuevo */
+}
+
+.modal-respuesta {
+    border-radius: 12px;
+    width: 100%;
+    max-width: 550px;
+    max-height: 100%;
+    animation: fadeIn 0.2s ease-in-out;
+    overflow: hidden; /* <- ¡Esto es clave! */
+    background-color: #1c1c1c; /* asegúrate de que tenga fondo */
+}
+
+.avatar-modal-respuesta {
+    border: #313030 1px solid;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.modal-header-respuesta {
+    background-color: #1c1c1c;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    border-bottom: 1px solid #444;
+    padding: 10px 10px 15px 0px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.modal-header-respuesta span {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.publicacion-original {
+    width: 100%;
+    /* background-color: #1c1c1c; */
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.avatar-Modal-respuesta {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.contenido-comentario {
+    flex: 1;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.texto-Modal-respuesta {
+    color: #dddbdb;
+    font-size: 0.95rem;
+}
+.texto-Modal-respuesta img{
+    border-radius: 10px;
+}
+.Crear-nuevo-comentario {
+    display: flex;
+
+}
+.responder-Modal-respuesta {
+    /* background-color: #1c1c1c; */
+    width: 100%;
+    padding: 20px;
+    padding: 0;
+}
+.responder-Modal-respuesta textarea {
+    width: 90%; /* en lugar de 80% */
+    box-sizing: border-box;
+    resize: none;
+    /* padding: 1rem; */
+    /* margin: 10px; */
+    /* border: 1px solid #ccc; */
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-responder {
+    padding: 0.5rem 1rem;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.mensaje-respuesta {
+    margin-top: 8px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.respuesta-item {
+    display: flex;
+    margin-top: 1rem;
+    padding-left: 2.5rem;
+}
+
+.acciones-respuesta {
+    display: flex;
+    gap: 10px;
+    margin-top: 0.5rem;
+    align-items: center;
+}
+.respuestas-guardadas {
+    display: block !important;
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin-top: 100px;
+}
+.respuesta-item {
+    display: flex !important;
+    padding: 1rem !important;
+    border-bottom: 1px solid #ddd;
+}
