@@ -166,7 +166,7 @@ const ModalRespuesta = ({ publicacion, onClose, respuestas: respuestasProp, onNu
                                 respuestas
                             />
 
-                            {Array.isArray(respuestas) && respuestas.length > 0 ? (
+                            {/* {Array.isArray(respuestas) && respuestas.length > 0 ? (
                                 respuestas.map((respuesta) => (
                                     <div key={respuesta.id} className="respuesta-item">
                                         <div className="container-avatar">
@@ -188,7 +188,7 @@ const ModalRespuesta = ({ publicacion, onClose, respuestas: respuestasProp, onNu
                                 ))
                             ) : (
                                 <p>No hay respuestas aún.</p>
-                            )}
+                            )} */}
 
                         </div>
 
