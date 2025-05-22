@@ -31,7 +31,7 @@ const Publicacion = ({
     const [likeCount, setLikeCount] = useState(likes);
     const [comentariosConLike, setComentariosConLike] = useState([]);
     const [modalRespuestasAbierto, setModalRespuestasAbierto] = useState(false);
-    // const [respuestasCount, setRespuestasCount] = useState(respuestas)  
+
     
 
 
