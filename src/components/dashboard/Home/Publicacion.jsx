@@ -6,7 +6,7 @@ import RepostIcon from "../../icons/RepostIcon";
 import SaveIcon from "../../icons/SaveIcon";
 import DeleteIcon from "../../icons/DeleteIcon";
 import ModalPerfilUsuario from "../Home/ModalPerfilUsuario";
-import ModalRespuesta from "./MOdalRespuesta";
+import ModalRespuesta from "./ModalRespuesta";
 import { darLikeComentario } from "../../../api/publicaciones/darLikeComentario";
 import { obtenerLikesComentario } from "../../../api/publicaciones/obtenerLikesComentario";
 import { eliminarLikeComentario } from "../../../api/publicaciones/eliminarLikeComentario";
