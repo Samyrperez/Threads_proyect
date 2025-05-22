@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import React from "react";
 import Login from "./pages/Login"; 
 import Register from "./pages/Register";
@@ -8,23 +8,41 @@ import PrivateRoute from "./routes/PrivateRoute";
 import "./css/styles.css";
 
 function App() {
-  return (
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+  const usuario = localStorage.getItem("usuario");
+  const isAuthenticated = !!usuario;
 
-        {/* ruta protegida */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
+  return (
+    <Routes>
+      {/* Ruta raíz: redirige a login o dashboard */}
+      <Route 
+        path="/" 
+        element={
+          isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+        } 
+      />
+
+      {/* Rutas públicas */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      {/* Rutas privadas */}
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
         }
       />
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    
+      <Route
+        path="/home"
+        element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        }
+      />
+    </Routes>
   );
 }
 
