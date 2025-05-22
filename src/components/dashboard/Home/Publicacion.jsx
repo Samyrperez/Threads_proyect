@@ -33,10 +33,6 @@ const Publicacion = ({
     const [modalRespuestasAbierto, setModalRespuestasAbierto] = useState(false);
 
     
-
-
-    
-
     const userId = parseInt(localStorage.getItem("userId"));
 
     const handleLikeComentario = async (comentarioId) => {
