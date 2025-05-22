@@ -14,7 +14,7 @@ const Register = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-           evsetShowLogo(false); 
+           setShowLogo(false); 
         }, 2000);
         return () => clearTimeout(timer);
     }, []);
