@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Publicar from "../components/dashboard/Tabs/TabHilos/Publicar";
 import Publicacion from "../components/dashboard/Home/Publicacion";
 import "../components/dashboard/Tabs/TabHilos/ModalHilo.css";
-import "../css/Home.css";
+import "../css/home.css";
 import { obtenerComentarios } from "../../src/api/publicaciones/obtenerComentarios";
 
 const Home = () => {
