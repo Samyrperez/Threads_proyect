@@ -21,11 +21,11 @@ function App() {
         } 
       />
 
-      {/* Rutas públicas */}
+      {/* publicas */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* Rutas privadas */}
+      {/* privadas */}
       <Route
         path="/dashboard"
         element={
